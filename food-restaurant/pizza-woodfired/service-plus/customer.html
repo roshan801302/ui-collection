@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forno Vivo | Wood-Fired Pizza Kitchen</title>
+  <meta name="description" content="Wood-fired pizza restaurant UI sample with handcrafted pies, combos, and fast ordering." />
+  <style>
+    :root{--dough:#fff6e8;--sauce:#c0392b;--basil:#2f855a;--char:#22201d;--card:#fff;--line:#bbf7d0;--shadow:0 16px 36px rgba(34,32,29,.1);--bg:#f0fdf4;--panel:#fff;--text:#14532d;--muted:#166534;--accent:#16a34a;--accent2:#15803d;--ink:#14532d}
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--char);background:radial-gradient(circle at top right,#ffe0d6,transparent 22%),linear-gradient(180deg,#fffaf2,var(--dough))}
+    .wrap{width:min(1120px,calc(100% - 2rem));margin:0 auto}
+    header{background:rgba(255,250,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);position:sticky;top:0}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.95rem 0}.brand{font-size:1.55rem;font-weight:900;color:var(--sauce);text-decoration:none}
+    nav a{text-decoration:none;color:#4b433c;font-weight:700;margin-left:1rem}
+    .hero{padding:4rem 0 2.5rem;display:grid;grid-template-columns:1.1fr .9fr;gap:1.2rem;align-items:center}
+    .tag{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:rgba(47,133,90,.12);color:var(--basil);font-weight:800}
+    h1,h2,h3{margin:0 0 .7rem;line-height:1.04} h1{font-size:clamp(2.5rem,5.5vw,4.6rem)} p{margin:0 0 1rem;color:#5c534b}
+    .actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
+    .btn{display:inline-flex;align-items:center;min-height:44px;padding:.78rem 1.1rem;border-radius:14px;text-decoration:none;font-weight:800}.btn-primary{background:var(--sauce);color:#fff}.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--char);border:1px solid rgba(15,23,42,.12)}
+    .visual,.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .visual{min-height:380px;padding:1.5rem;display:flex;align-items:end;background:radial-gradient(circle at 75% 25%,#ffd19a,transparent 18%),linear-gradient(135deg,#7a2d23,#2f211b);color:#fff}
+    section{padding:2.75rem 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{padding:1.2rem}
+    .meta{display:flex;justify-content:space-between;gap:.5rem;align-items:center;margin-top:.75rem}.price{color:var(--sauce);font-weight:900}.size{font-size:.85rem;font-weight:700;color:#6b6158;background:#f5eee3;padding:.2rem .5rem;border-radius:999px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    footer{padding:2rem 0 3rem;color:#5c534b;border-top:1px solid var(--line)}
+    a:focus-visible{outline:3px solid rgba(192,57,43,.24);outline-offset:2px}
+    @media (max-width:860px){.hero,.grid,.split{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start}nav a{margin-left:0;margin-right:1rem}}
+  .photo{width:100%;height:100%;min-height:inherit;object-fit:cover;display:block;border-radius:inherit;}
+  
+  /* detail-sections */
+  .detail-sections{padding:0 0 1rem}
+  .detail-sections .d-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .detail-sections .d-section{padding:2.5rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .detail-sections h2{margin:0 0 .65rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .detail-sections .d-lead{margin:0 0 1rem;color:#5b6475}
+  .detail-sections .d-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.1rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .detail-sections .d-kicker{display:inline-block;margin-bottom:.55rem;padding:.22rem .55rem;border-radius:999px;font-size:.76rem;font-weight:800;background:#eef2ff;color:#3730a3}
+  .detail-sections .d-meta{color:#5b6475;font-size:.95rem}
+  .detail-sections .d-steps{margin:0;padding-left:1.2rem;color:#4b5563}.detail-sections .d-steps li{margin:.45rem 0}
+  .detail-sections .d-quote{font-size:1rem;color:#1f2937}.detail-sections .d-quote footer{margin-top:.65rem;color:#6b7280;font-weight:700;background:none;padding:0;border:0}
+  .detail-sections details{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:14px;padding:.85rem 1rem;margin:.65rem 0}
+  .detail-sections summary{cursor:pointer;font-weight:700}
+  .detail-sections .d-form{display:grid;gap:.75rem}.detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .detail-sections input,.detail-sections select,.detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .detail-sections textarea{min-height:100px;resize:vertical}
+  .detail-sections .d-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .detail-sections .d-cta{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:22px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .detail-sections .d-cta p{color:rgba(255,255,255,.78);margin:0}
+  .detail-sections .d-cta .d-btn{background:#fff;color:#111827}
+  @media (max-width:900px){.detail-sections .d-grid,.detail-sections .d-grid-2{grid-template-columns:1fr}}
+
+  
+  .ux-detail-sections{padding:0 0 1.25rem}.ux-detail-sections .u-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .ux-detail-sections .u-sec{padding:2.4rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .ux-detail-sections h2{margin:0 0 .45rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .ux-detail-sections .u-lead{margin:0 0 1rem;color:#5b6475}
+  .ux-detail-sections .u-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.05rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .ux-detail-sections .u-k{display:inline-block;margin-bottom:.5rem;padding:.22rem .55rem;border-radius:999px;font-size:.75rem;font-weight:800;background:#ecfeff;color:#155e75}
+  .ux-detail-sections .u-muted{color:#5b6475}.ux-detail-sections ul{margin:.65rem 0 0;padding-left:1.2rem;color:#4b5563}
+  .ux-detail-sections .u-metric strong{display:block;font-size:1.35rem;color:#111827}.ux-detail-sections .u-metric span{color:#5b6475;font-size:.92rem}
+  .ux-detail-sections .u-plan{position:relative}.ux-detail-sections .u-plan.featured{border-color:rgba(37,99,235,.28);box-shadow:0 14px 30px rgba(37,99,235,.10)}
+  .ux-detail-sections .u-price{font-size:1.25rem;font-weight:800;color:#111827;margin:.15rem 0 .55rem}
+  .ux-detail-sections .u-gallery{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.75rem}
+  .ux-detail-sections .u-shot{min-height:140px;border-radius:16px;border:1px solid rgba(15,23,42,.08);display:flex;align-items:end;padding:.85rem;font-weight:700;color:#0f172a;background:linear-gradient(135deg,#e2e8f0,#f8fafc)}
+  .ux-detail-sections .u-shot.main{min-height:220px;background:linear-gradient(135deg,#dbeafe,#eff6ff)}
+  .ux-detail-sections .u-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid rgba(15,23,42,.09);border-radius:16px;background:#fff}
+  .ux-detail-sections .u-table th,.ux-detail-sections .u-table td{padding:.8rem .85rem;text-align:left;border-bottom:1px solid rgba(15,23,42,.08);vertical-align:top}
+  .ux-detail-sections .u-table th{background:#f8fafc;font-size:.9rem}.ux-detail-sections .u-table tr:last-child td{border-bottom:0}
+  .ux-detail-sections .u-check{color:#059669;font-weight:800}
+  .ux-detail-sections .u-timeline{display:grid;gap:.75rem}.ux-detail-sections .u-step{display:flex;gap:.75rem;align-items:flex-start}
+  .ux-detail-sections .u-n{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:#111827;color:#fff;font-weight:800;flex:none}
+  .ux-detail-sections .u-form{display:grid;gap:.75rem}.ux-detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .ux-detail-sections input,.ux-detail-sections select,.ux-detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .ux-detail-sections textarea{min-height:96px;resize:vertical}
+  .ux-detail-sections .u-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .ux-detail-sections .u-cta{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-radius:22px;padding:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .ux-detail-sections .u-cta p{margin:0;color:rgba(255,255,255,.78)} .ux-detail-sections .u-cta .u-btn{background:#fff;color:#111827}
+  @media (max-width:980px){.ux-detail-sections .u-grid,.ux-detail-sections .u-grid-4,.ux-detail-sections .u-grid-2,.ux-detail-sections .u-gallery{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion: reduce){.ux-detail-sections *{scroll-behavior:auto}}
+
+
+/* variant-theme:service-plus */
+:root{--bg:#f0fdf4;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#14532d;--muted:#166534;--line:#bbf7d0;--accent:#16a34a;--accent2:#15803d;--cat-accent:#f97316}
+body{background:var(--bg) !important;color:var(--text) !important}
+.card,.panel,article,section .box,.d-card,.u-card,.kpi,.item{background:var(--card) !important;color:var(--text) !important;border-color:var(--line) !important}
+h1,h2,h3,h4{color:var(--text) !important}
+p,.muted,.u-muted,.d-meta,.d-lead,.u-lead{color:var(--muted) !important}
+a.btn.primary,.btn-primary,button.primary{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+.btn,.btn-ghost,a.btn{border-color:var(--line) !important;color:var(--text) !important}
+.hero,.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.cards,.grid,.features,.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.detail-sections,.extra{display:block}
+@media (max-width:900px){.hero,.split,.cards,.grid,.features,.kpis{grid-template-columns:1fr !important}}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head>
+<body>
+  <header><div class="wrap nav"><a class="brand" href="#">Forno Vivo</a><nav aria-label="Primary"><a href="#menu">Pizzas</a><a href="#combos">Combos</a><a href="#order">Order</a><a href="../main/admin.html" style="margin-left:1rem;font-weight:700">Owner/Admin</a></nav></div></header>
+  <main class="wrap">
+    <section class="hero">
+      <div><span class="tag">Wood-Fired Pizza Kitchen</span><h1>Hand-stretched pizzas with blistered crust and bold flavor.</h1><p>A pizza restaurant sample for dine-in, takeaway, and quick online ordering. Great for showcasing signature pies, sizes, and combo deals.</p><div class="actions"><a class="btn btn-primary" href="#order">Order Now</a><a class="btn btn-ghost" href="#menu">View Pizzas</a></div></div>
+      <div class="visual" role="img" aria-label="Wood-fired pizza visual"><img class="photo" src="../../../../assets/photos/pexels-958545.jpg" alt="Wood-fired pizza" loading="lazy" /></div></div>
+    </section>
+    <section id="menu"><h2>Signature Pizzas</h2><div class="grid ui-grid">
+      <article class="card"><h3>Pepper &amp; Basil Fire</h3><p>Roasted peppers, onions, mozzarella, basil.</p><div class="meta"><span class="size">Medium / Large</span><span class="price">₹349+</span></div></article>
+      <article class="card"><h3>Smoky Farmhouse</h3><p>Loaded veggies, smoky seasoning, extra cheese.</p><div class="meta"><span class="size">Medium / Large</span><span class="price">₹399+</span></div></article>
+      <article class="card"><h3>Garlic Paneer Melt</h3><p>Paneer cubes, garlic cream, herbs, chili flakes.</p><div class="meta"><span class="size">Medium / Large</span><span class="price">₹429+</span></div></article>
+    </div></section>
+    <section id="combos" class="split">
+      <div class="card"><h2>Combo Deals</h2><p>Pizza + garlic bread + drink combos, family boxes, and party packs. Perfect for high-conversion ordering sections.</p></div>
+      <div class="card" id="order"><h2>Order / Visit</h2><p><strong>Hours:</strong> 11 AM – 11 PM<br /><strong>Services:</strong> Dine-in, takeaway, delivery links<br /><strong>CTA:</strong> Add app/order buttons and live tracking in production.</p></div>
+    </section>
+  
+  <section class="detail-sections" aria-label="Detailed UI views">
+    <div class="d-wrap">
+      <section class="d-section" id="details-overview">
+        <h2>Detailed UI Views</h2>
+        <p class="d-lead">Additional sample sections for Forno Vivo | Wood-Fired Pizza Kitchen: offerings, process, testimonials, FAQ, contact details, and final CTA. Replace placeholder content with approved business data.</p>
+        <div class="d-grid">
+          <article class="d-card"><span class="d-kicker">Menu / Packages</span><h3>Signature Dish / Combo</h3><p class="d-meta">Featured item with description, dietary label, and sample price.</p></article>
+          <article class="d-card"><span class="d-kicker">Popular</span><h3>Daily Special</h3><p class="d-meta">Rotating offer to highlight freshness and promotions.</p></article>
+          <article class="d-card"><span class="d-kicker">Custom</span><h3>Family / Group Pack</h3><p class="d-meta">Bundle option for dine-in, takeaway, or events.</p></article>
+        </div>
+      </section>
+      <section class="d-section" id="details-process">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">Process</span><h3>Ordering / Visit Flow</h3><ol class="d-steps"><li>Browse menu or specials</li><li>Choose dine-in, takeaway, or pickup</li><li>Confirm details/payment method</li><li>Receive order status or table service</li></ol></article>
+          <article class="d-card"><span class="d-kicker">Trust</span><h3>Testimonials / Social Proof</h3>
+            <blockquote class="d-quote"><p>“Great taste and friendly service.”</p><footer>— Sample Guest</footer></blockquote><blockquote class="d-quote"><p>“Easy to order and quick pickup.”</p><footer>— Regular Customer</footer></blockquote><blockquote class="d-quote"><p>“Clean layout and clear menu.”</p><footer>— Demo Feedback</footer></blockquote>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-faq">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">FAQ</span><h3>Common Questions</h3>
+            <details><summary>Do you take reservations/orders?</summary><p class="d-meta">Yes. Replace with real booking/order channels.</p></details><details><summary>Are dietary options available?</summary><p class="d-meta">Add vegetarian, vegan, allergen, or spice labels as needed.</p></details><details><summary>Do you offer delivery or catering?</summary><p class="d-meta">Specify service area, partners, and minimum order details.</p></details>
+          </article>
+          <article class="d-card"><span class="d-kicker">Inquiry</span><h3>Contact / Request Form</h3>
+            <form class="d-form" action="#" method="post"><label>Guest name<input type="text" name="name" placeholder="Sample Name" /></label><label>Phone<input type="text" name="phone" placeholder="+00 00000 00000" /></label><label>Request<select name="type"><option>Table reservation</option><option>Takeaway order</option><option>Delivery</option><option>Catering/enquiry</option></select></label><label>Date, time &amp; guests<input type="text" name="when" placeholder="DD/MM, 7:30 PM, 4 guests" /></label><label>Order / special requests<textarea name="notes" placeholder="Menu items, allergies, occasion notes"></textarea></label><button class="d-btn" type="submit">Reserve / Order</button></form>
+            <p class="d-meta" style="margin-top:.75rem"><strong>Sample contact:</strong> +00 00000 00000 • contact@sample-business.demo • 123 Sample Street, Demo District</p>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-cta">
+        <div class="d-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">Ready to adapt this sample?</h2><p>Replace dummy data, connect real forms/services, add approved images, and finalize legal/policy content before launch.</p></div><span class="d-btn" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.22)">Use approved project data</span></div>
+      </section>
+    </div>
+  </section>
+
+
+  <section class="ux-detail-sections" aria-label="Enhanced UI/UX views">
+    <div class="u-wrap">
+      <section class="u-sec" id="ux-overview">
+        <h2>Enhanced UI/UX Views</h2>
+        <p class="u-lead">More detailed sample views for Forno Vivo | Wood-Fired Pizza Kitchen: metrics, plans, gallery, comparison, timeline, team, accessibility notes, and conversion-focused CTAs. All values are placeholders.</p>
+        <div class="u-grid-4">
+          <article class="u-card u-metric"><strong>4.8/5</strong><span>Sample rating</span></article><article class="u-card u-metric"><strong>15–25 min</strong><span>Avg. prep/pickup</span></article><article class="u-card u-metric"><strong>100+</strong><span>Menu items/options</span></article><article class="u-card u-metric"><strong>100%</strong><span>Responsive layout</span></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-plans">
+        <h2>Plans / Packages / Options</h2>
+        <div class="u-grid">
+          <article class="u-card u-plan"><span class="u-k">Option</span><h3>Dine-In Experience</h3><div class="u-price">[Add price]</div><p class="u-muted">Table service and ambiance</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan featured"><span class="u-k">Popular</span><h3>Takeaway / Pickup</h3><div class="u-price">[Add price]</div><p class="u-muted">Fast ordering and ready status</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan"><span class="u-k">Option</span><h3>Catering / Group</h3><div class="u-price">[Add price]</div><p class="u-muted">Custom menu and advance booking</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-gallery">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Gallery / Visuals</span>
+            <h3>Sample Visual Sections</h3>
+            <div class="u-gallery" aria-label="Gallery placeholders">
+              <div class="u-shot main">Signature dish view</div>
+              <div class="u-shot">Interior / ambiance</div>
+              <div class="u-shot">Fresh ingredients / prep</div>
+            </div>
+            <p class="u-muted" style="margin-top:.75rem">Use approved local/project images in production. Current samples keep local placeholder assets and dummy copy.</p>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Feature Highlights</span>
+            <h3>UI/UX Components Included</h3>
+            <ul><li>Live menu highlights</li><li>Dietary labels &amp; allergen notes</li><li>Specials and combos</li><li>Reservation/order CTA</li><li>Location, hours, map</li><li>Reviews and social proof</li></ul>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-compare">
+        <h2>Comparison / Details Table</h2>
+        <table class="u-table" aria-label="Comparison table">
+          <thead><tr><th>Feature</th><th>Basic</th><th>Standard</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><td>Core information</td><td class="u-check">Included</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Detailed visuals/content</td><td>Limited</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Advanced actions (booking/order/inquiry)</td><td>Optional</td><td>Optional</td><td class="u-check">Included</td></tr>
+            <tr><td>Support/follow-up</td><td>Basic</td><td>Standard</td><td>Priority</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="u-sec" id="ux-process-team">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Timeline</span>
+            <h3>Step-by-Step Experience</h3>
+            <div class="u-timeline">
+              <div class="u-step"><span class="u-n">1</span><div><strong>Discover</strong><p class="u-muted">User reviews key info, visuals, and value proposition.</p></div></div>
+              <div class="u-step"><span class="u-n">2</span><div><strong>Compare</strong><p class="u-muted">Plans, features, FAQs, and trust signals support decisions.</p></div></div>
+              <div class="u-step"><span class="u-n">3</span><div><strong>Act</strong><p class="u-muted">Clear CTA leads to contact, booking, order, or inquiry.</p></div></div>
+              <div class="u-step"><span class="u-n">4</span><div><strong>Follow up</strong><p class="u-muted">Confirmation, support, and next steps keep the flow complete.</p></div></div>
+            </div>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Team / Trust</span>
+            <h3>People &amp; Credibility Blocks</h3>
+            <ul><li><strong>Head Chef / Manager:</strong> Menu quality and operations</li><li><strong>Service Team:</strong> Guest experience and support</li><li><strong>Kitchen Team:</strong> Fresh preparation and hygiene</li></ul>
+            <p class="u-muted" style="margin-top:.75rem">Add verified names, licenses, certifications, policies, and real testimonials before production use.</p>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-access-contact">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Accessibility / UX</span>
+            <h3>Usability Checklist</h3>
+            <ul>
+              <li>Responsive layout for mobile, tablet, and desktop</li>
+              <li>Readable contrast, spacing, and clear visual hierarchy</li>
+              <li>Visible labels/placeholders and action-oriented CTAs</li>
+              <li>Semantic sections, keyboard-friendly controls, and reduced-motion support</li>
+              <li>Placeholder content only — replace with accurate data</li>
+            </ul>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Quick Contact</span>
+            <h3>Conversion Form</h3>
+            <form class="u-form" action="#" method="post"><label>Name<input type="text" name="name" placeholder="Sample Name" /></label><label>Phone<input type="text" name="phone" placeholder="+00 00000 00000" /></label><label>Type<select name="type"><option>Reservation</option><option>Takeaway</option><option>Delivery</option></select></label><label>Details<textarea name="notes" placeholder="Date/time, guests, items"></textarea></label><button class="u-btn" type="submit">Send Request</button></form>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-final">
+        <div class="u-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">More detailed UI/UX sample view</h2><p>This sample now includes richer sections, comparison UI, process/timeline, trust blocks, and conversion-focused forms using dummy placeholders.</p></div><a class="u-btn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top</a></div>
+      </section>
+    </div>
+  </section>
+
+</main>
+  <footer class="wrap">UI sample: Wood-Fired Pizza Kitchen</footer>
+
+<script>
+(function(){
+  var path = location.pathname.replace(/\\/g,'/');
+  var m = path.match(/\/([^\/]+)\/([^\/]+)\/customer\.html$/);
+  if (!m) return;
+  var key = 'ui_customer_' + m[1] + '_' + m[2];
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    var map = {
+      businessName: ['[data-editable="businessName"]','h1','.brand strong','.brand','.logo-text'],
+      heroTitle: ['[data-editable="heroTitle"]','h1','.hero h1','header h1'],
+      heroSubtitle: ['[data-editable="heroSubtitle"]','.hero p','.subhead','header p','.muted'],
+      contact: ['[data-editable="contact"]','.contact','.phone','[href^="tel:"]'],
+      address: ['[data-editable="address"]','.address','address'],
+      announcement: ['[data-editable="announcement"]','.announcement','.notice','.banner']
+    };
+    Object.keys(map).forEach(function(k){
+      if (!d[k]) return;
+      for (var i=0;i<map[k].length;i++){
+        var el = document.querySelector(map[k][i]);
+        if (el){ el.textContent = d[k]; break; }
+      }
+    });
+    var note = document.querySelector('[data-admin-note]') || document.createElement('div');
+    note.setAttribute('data-admin-note','1');
+    note.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999;max-width:min(360px,calc(100vw - 24px));padding:.65rem .8rem;border-radius:12px;background:#111827;color:#fff;font:600 12px/1.4 system-ui;box-shadow:0 10px 24px rgba(0,0,0,.25)';
+    note.textContent = 'Admin manual edits applied from this browser' + (d.updatedAt ? (' · ' + d.updatedAt) : '') + '.';
+    if (!note.parentNode) document.body.appendChild(note);
+  } catch(e) {}
+})();
+</script>
+
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body>
+</html>

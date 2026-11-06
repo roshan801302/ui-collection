@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Local Vegetable &amp; Fruit Vendor — Booking Customer UI</title>
+<style>
+:root{--bg:#faf5ff;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#3b0764;--muted:#6b21a8;--line:#e9d5ff;--accent:#9333ea;--accent2:#7e22ce;--cat-accent:#16a34a;--ink:#3b0764}
+*{box-sizing:border-box} body{margin:0;font:15px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1100px;margin:0 auto;padding:1rem} .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;margin:.75rem 0}
+h1,h2,h3{margin:.1rem 0 .5rem} .muted{color:var(--muted)} .grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.btn{display:inline-flex;padding:.55rem .85rem;border-radius:10px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-weight:700;background:var(--card)}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent} nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:.75rem} img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse} th,td{padding:.55rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pill{display:inline-block;padding:.15rem .45rem;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);font-size:.75rem;font-weight:700}
+input,select{background:var(--bg);color:var(--text);border:1px solid var(--line);padding:.6rem .7rem;border-radius:10px;width:100%}
+@media (max-width:800px){.hero{grid-template-columns:1fr}}
+/* variant-theme:booking */
+:root{--bg:#faf5ff;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#3b0764;--muted:#6b21a8;--line:#e9d5ff;--accent:#9333ea;--accent2:#7e22ce;--cat-accent:#16a34a;--ink:#3b0764}
+.booking-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;align-items:end}
+.booking-form label{display:grid;gap:.35rem;font-weight:600}
+.booking-form input,.booking-form select{min-height:46px}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/contrast-fix.css?v=20260502c">
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css">
+<script defer src="../../../../assets/ui-enhance/ui-enhance.js"></script>
+</head><body>
+<div class="wrap">
+  <nav><a class="btn" href="../../../index.html">Gallery</a><a class="btn" href="../index.html">Local Vegetable &amp; Fruit Vendor</a><a class="btn primary" href="./admin.html">Open Admin</a><a class="btn" href="#s0">Today’s</a><a class="btn" href="#s1">Delivery</a><a class="btn" href="#s2">Basket</a></nav>
+  <section class="card hero"><div>
+    <span class="pill">Booking · Hyper-local · Lean/Contextual UI</span>
+    <h1>Local Vegetable &amp; Fruit Vendor — Booking</h1>
+    <p class="muted">Daily price list, morning/evening delivery slots, basket orders, and local vendor ops.</p>
+    <p class="muted">Static UI sample with dummy/placeholder data only. <strong>UX model:</strong> Contextual Design.</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem"><a class="btn primary" href="#booking">Reserve a delivery slot</a><a class="btn" href="./admin.html">View Admin Workflow</a></div>
+  </div><div><img src="../../../../assets/photos/pexels-kirana-8475172.jpg" alt="Local Vegetable &amp; Fruit Vendor sample photo"/></div></section>
+  <div class="card" id="s0"><h2>Today’s Price List</h2><p class="muted">Seasonal vegetables/fruits with quick basket add.</p><table><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th></tr></thead><tbody><tr><td>Tomato</td><td>1 kg</td><td>₹40</td><td>₹40</td></tr><tr><td>Banana</td><td>1 dozen</td><td>₹60</td><td>₹60</td></tr></tbody></table><div class="grid"><div class="card" style="margin:0"><strong>Tomato — ₹40/kg (demo)</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Onion — ₹35/kg</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Banana — ₹60/dozen</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Apple — ₹180/kg</strong><div class="muted">Demo / UI placeholder</div></div></div></div><div class="card" id="s1"><h2>Delivery Slots</h2><p class="muted">Morning/evening local delivery.</p><div class="grid"><div class="card" style="margin:0"><strong>Morning 7-9 AM</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Evening 5-7 PM</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Pickup from cart/stall</strong><div class="muted">Demo / UI placeholder</div></div></div></div><div class="card" id="s2"><h2>Basket Order</h2><p class="muted">Repeat daily/alternate basket.</p><div class="grid"><div class="card" style="margin:0"><strong>Daily essentials basket (demo)</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Fruit basket</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Custom basket request</strong><div class="muted">Demo / UI placeholder</div></div></div></div>
+  <div class="card"><strong>Contact (demo)</strong><div class="muted">+00 00000 00000 · contact@sample-business.demo · 123 Sample Street, Demo District</div></div>
+</div>
+<div class="wrap"><section class="card" id="booking" aria-labelledby="booking-title">
+  <h2 id="booking-title">Reserve a delivery slot</h2>
+  <p class="muted">Choose a date, delivery window, and basket for this booking demo.</p>
+  <form class="booking-form">
+    <label>Customer name<input type="text" name="customer" autocomplete="name" placeholder="Your name"/></label>
+    <label>Delivery date<input type="date" name="delivery-date"/></label>
+    <label>Delivery window<select name="delivery-slot"><option>Morning · 7–9 AM</option><option>Evening · 5–7 PM</option><option>Pickup</option></select></label>
+    <label>Basket<select name="basket"><option>Daily essentials</option><option>Fruit basket</option><option>Custom basket</option></select></label>
+    <button class="btn primary" type="button">Preview booking</button>
+  </form>
+  <p class="muted">Preview only; this static sample does not submit or save orders.</p>
+</section></div>
+</body></html>

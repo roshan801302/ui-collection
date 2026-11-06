@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Local Roadside Mechanic Assist — Main Customer UI</title>
+<style>
+:root{--bg:#f8fafc;--card:#ffffff;--panel:#ffffff;--panel2:color-mix(in srgb,#ffffff, black 6%);--text:#0f172a;--muted:#475569;--line:#e2e8f0;--accent:#2563eb;--accent2:#06b6d4;--cat-accent:#f97316;--ink:#0f172a}
+*{box-sizing:border-box} body{margin:0;font:15px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1100px;margin:0 auto;padding:1rem} .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;margin:.75rem 0}
+h1,h2,h3{margin:.1rem 0 .5rem} .muted{color:var(--muted)} .grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.btn{display:inline-flex;padding:.55rem .85rem;border-radius:10px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-weight:700;background:var(--card)}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent} nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:.75rem} img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse} th,td{padding:.55rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pill{display:inline-block;padding:.15rem .45rem;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);font-size:.75rem;font-weight:700}
+input,select{background:var(--bg);color:var(--text);border:1px solid var(--line);padding:.6rem .7rem;border-radius:10px;width:100%}
+@media (max-width:800px){.hero{grid-template-columns:1fr}}
+/* variant-theme:main */
+:root{--bg:#f8fafc;--card:#ffffff;--panel:#ffffff;--panel2:color-mix(in srgb,#ffffff, black 6%);--text:#0f172a;--muted:#475569;--line:#e2e8f0;--accent:#2563eb;--accent2:#06b6d4;--cat-accent:#f97316;--ink:#0f172a}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/contrast-fix.css?v=20260502c">
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css">
+<script defer src="../../../../assets/ui-enhance/ui-enhance.js"></script>
+</head><body>
+<div class="wrap">
+  <nav><a class="btn" href="../../../index.html">Gallery</a><a class="btn" href="../index.html">Local Roadside Mechanic Assist</a><a class="btn primary" href="./admin.html">Open Admin</a><a class="btn" href="#s0">Request</a><a class="btn" href="#s1">Service</a><a class="btn" href="#s2">Status</a></nav>
+  <section class="card hero"><div>
+    <span class="pill">Main · Hyper-local · Lean/Contextual UI</span>
+    <h1>Local Roadside Mechanic Assist — Main</h1>
+    <p class="muted">Roadside help requests, mechanic dispatch, ETA tracking, and service completion.</p>
+    <p class="muted">Static UI sample with dummy/placeholder data only. <strong>UX model:</strong> User-Centered Design (UCD).</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem"><a class="btn primary" href="#s0">Start Action</a><a class="btn" href="./admin.html">View Admin Workflow</a></div>
+  </div><div><img src="../../../../assets/photos/automotive-repair.jpg" alt="Local Roadside Mechanic Assist sample photo"/></div></section>
+  <div class="card" id="s0"><h2>Request Roadside Help</h2><p class="muted">Share vehicle issue, location, and contact for quick dispatch.</p><table><thead><tr><th>Request</th><th>Issue</th><th>ETA</th><th>Status</th></tr></thead><tbody><tr><td>RA-21</td><td>Puncture</td><td>25 min</td><td>Assigned</td></tr><tr><td>RA-19</td><td>Battery</td><td>Completed</td><td>Closed</td></tr></tbody></table><div class="grid"><div class="card" style="margin:0"><strong>Issue: battery / puncture / towing / engine</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Location landmark (demo)</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Vehicle type and number placeholder</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Call mechanic / request assist</strong><div class="muted">Demo / UI placeholder</div></div></div></div><div class="card" id="s1"><h2>Service Types</h2><p class="muted">Common roadside assistance options.</p><div class="grid"><div class="card" style="margin:0"><strong>Jump start / battery</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Flat tyre / puncture</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Fuel delivery placeholder</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Towing coordination</strong><div class="muted">Demo / UI placeholder</div></div></div></div><div class="card" id="s2"><h2>Status Updates</h2><p class="muted">Dispatch, ETA, and completion status.</p><div class="grid"><div class="card" style="margin:0"><strong>Mechanic assigned</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>On the way — ETA 25 min</strong><div class="muted">Demo / UI placeholder</div></div><div class="card" style="margin:0"><strong>Service completed / payment placeholder</strong><div class="muted">Demo / UI placeholder</div></div></div></div>
+  <div class="card"><strong>Contact (demo)</strong><div class="muted">+00 00000 00000 · contact@sample-business.demo · 123 Sample Street, Demo District</div></div>
+</div>
+</body></html>

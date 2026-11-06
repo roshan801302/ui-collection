@@ -1,0 +1,6 @@
+select option,select optgroup{background:var(--panel,var(--card,Canvas));color:var(--text,CanvasText)}
+:root[data-ui-theme="light"] select{color-scheme:light}
+:root[data-ui-theme="dark"] select{color-scheme:dark}
+:root[data-ui-theme="dark"] select option,
+:root[data-ui-theme="dark"] select optgroup{background:#121a2d;color:#f8fafc}
+:root[data-ui-theme="light"]{--good:#166534;--warn:#92400e;--bad:#b91c1c}

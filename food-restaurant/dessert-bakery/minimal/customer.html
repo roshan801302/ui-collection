@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Dessert Bakery — Minimal Customer UI</title>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--panel:#ffffff;--accent2:#374151;--ink:#111827}
+*{box-sizing:border-box} body{margin:0;font:15px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1100px;margin:0 auto;padding:1rem} .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;margin:.75rem 0}
+h1,h2,h3{margin:.1rem 0 .5rem} .muted{color:var(--muted)} .grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.btn{display:inline-flex;padding:.55rem .85rem;border-radius:10px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-weight:700;background:#fff}
+.btn.primary{background:var(--accent);color:#ffffff;border-color:transparent} nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:.75rem} img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse} th,td{padding:.55rem;border-bottom:1px solid var(--line);text-align:left} .kpi strong{display:block;font-size:1.3rem}
+.pill{display:inline-block;padding:.15rem .45rem;border-radius:999px;background:#eef2ff;font-size:.75rem;font-weight:700}
+@media (max-width:800px){.hero{grid-template-columns:1fr}}
+
+/* variant-theme:minimal */
+:root{--bg:#ffffff;--card:#ffffff;--panel:#ffffff;--panel2:color-mix(in srgb,#ffffff, black 6%);--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--accent2:#374151;--cat-accent:#f97316}
+body{background:var(--bg) !important;color:var(--text) !important}
+.card,.panel,article,section .box,.d-card,.u-card,.kpi,.item{background:var(--card) !important;color:var(--text) !important;border-color:var(--line) !important}
+h1,h2,h3,h4{color:var(--text) !important}
+p,.muted,.u-muted,.d-meta,.d-lead,.u-lead{color:var(--muted) !important}
+a.btn.primary,.btn-primary,button.primary{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+.btn,.btn-ghost,a.btn{border-color:var(--line) !important;color:var(--text) !important}
+.hero,.split{display:block}.cards,.grid,.features,.kpis{display:grid;grid-template-columns:1fr;gap:.75rem}.card,.panel{box-shadow:none;border-radius:10px}.wrap{max-width:860px}
+@media (max-width:900px){.hero,.split,.cards,.grid,.features,.kpis{grid-template-columns:1fr !important}}
+</style><link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head><body><div class="wrap">
+<nav><a class="btn" href="../index.html">Samples</a><a class="btn" href="../main/customer.html">Main Customer</a><a class="btn" href="../main/admin.html">Main Admin</a><a class="btn" href="../minimal/admin.html">Minimal Admin</a><a class="btn" href="../../../index.html">Gallery</a></nav>
+<div class="card hero"><div><span class="pill">Customer UI · Minimal</span><h1>Dessert Bakery — Minimal Customer Sample</h1><p class="muted">Low-noise, focused content. UI-only sample with dummy placeholder data, UI sample with dummy data.</p><div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;align-items:center"><a class="btn primary" href="#details">View details</a><a class="btn" href="../minimal/admin.html">Open Admin</a></div></div><div><img src="../../../../assets/photos/pexels-30909899.jpg" alt="Dessert Bakery sample" onerror="this.style.display='none'"/></div></div>
+<div id="details" class="grid ui-grid">
+  <div class="card"><h2>Highlights</h2><p class="muted">Browse offerings, view details, and submit a sample inquiry.</p>
+  <div class="grid ui-grid"><div class="card kpi"><strong>12</strong><div class="muted">Featured items</div></div><div class="card kpi"><strong>[Add]</strong><div class="muted">Open hours</div></div><div class="card kpi"><strong>4.8</strong><div class="muted">Sample rating</div></div></div></div>
+  <div class="card"><h2>Quick actions</h2><table><tr><th>Action</th><th>Status</th></tr>
+  <tr><td>View menu/catalog</td><td><span class="pill">Ready</span></td></tr><tr><td>Book/request</td><td><span class="pill">Sample</span></td></tr><tr><td>Contact business</td><td><span class="pill">Demo</span></td></tr></table></div>
+</div>
+<div class="card"><h2>Notes</h2><p class="muted">Static UI sample only. Replace dummy text/images/links with real project content. Linked pair: <a href="../minimal/admin.html">Minimal Admin</a>.</p></div>
+</div>
+<script>
+(function(){
+  var path = location.pathname.replace(/\\/g,'/');
+  var m = path.match(/\/([^\/]+)\/([^\/]+)\/customer\.html$/);
+  if (!m) return;
+  var key = 'ui_customer_' + m[1] + '_' + m[2];
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    var map = {
+      businessName: ['[data-editable="businessName"]','h1','.brand strong','.brand','.logo-text'],
+      heroTitle: ['[data-editable="heroTitle"]','h1','.hero h1','header h1'],
+      heroSubtitle: ['[data-editable="heroSubtitle"]','.hero p','.subhead','header p','.muted'],
+      contact: ['[data-editable="contact"]','.contact','.phone','[href^="tel:"]'],
+      address: ['[data-editable="address"]','.address','address'],
+      announcement: ['[data-editable="announcement"]','.announcement','.notice','.banner']
+    };
+    Object.keys(map).forEach(function(k){
+      if (!d[k]) return;
+      for (var i=0;i<map[k].length;i++){
+        var el = document.querySelector(map[k][i]);
+        if (el){ el.textContent = d[k]; break; }
+      }
+    });
+    var note = document.querySelector('[data-admin-note]') || document.createElement('div');
+    note.setAttribute('data-admin-note','1');
+    note.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999;max-width:min(360px,calc(100vw - 24px));padding:.65rem .8rem;border-radius:12px;background:#111827;color:#0f172a;font:600 12px/1.4 system-ui;box-shadow:0 10px 24px rgba(0,0,0,.25)';
+    note.textContent = 'Admin manual edits applied from this browser' + (d.updatedAt ? (' · ' + d.updatedAt) : '') + '.';
+    if (!note.parentNode) document.body.appendChild(note);
+  } catch(e) {}
+})();
+</script>
+
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body></html>

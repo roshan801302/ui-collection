@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PrimeNest | Real Estate Sample</title>
+  <meta name="description" content="Real estate website UI sample with property listings, search filters, and agent inquiry." />
+  <style>
+    :root{--navy:#14213d;--gold:#d4a017;--bg:#f0fdf4;--ink:#1f2937;--muted:#166534;--card:#fff;--line:#bbf7d0;--shadow:0 16px 34px rgba(20,33,61,.08);--panel:#fff;--text:#14532d;--accent:#16a34a;--accent2:#15803d}
+    *{box-sizing:border-box} body{margin:0;font:16px/1.65 system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--bg))}
+    .wrap{width:min(1160px,calc(100% - 2rem));margin:0 auto}
+    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.95rem 0}.brand{font-size:1.45rem;font-weight:800;color:var(--navy);text-decoration:none}
+    nav a{text-decoration:none;color:var(--muted);font-weight:700;margin-left:1rem}
+    .hero{padding:4rem 0 2.5rem}.hero-box{background:linear-gradient(135deg,var(--navy),#243b6b);color:#fff;border-radius:24px;padding:1.5rem;box-shadow:var(--shadow)}
+    h1,h2,h3{margin:0 0 .7rem;line-height:1.08} h1{font-size:clamp(2.3rem,5vw,4rem)} .hero-box p{color:rgba(255,255,255,.82)}
+    .search{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1.2rem}.search div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:.8rem}.search strong{display:block}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.78rem 1.1rem;border-radius:12px;text-decoration:none;font-weight:800}.btn-primary{background:var(--gold);color:#2b2100}
+    section{padding:2.75rem 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:1.2rem}
+    .img{height:150px;border-radius:14px;background:linear-gradient(135deg,#dbeafe,#e5e7eb);margin-bottom:.9rem}
+    .price{color:var(--navy);font-weight:900;font-size:1.1rem}.meta{color:var(--muted);font-size:.92rem}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line)}
+    @media (max-width:900px){.search,.grid,.split{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start}nav a{margin-left:0;margin-right:1rem}}
+  .photo{width:100%;height:100%;min-height:inherit;object-fit:cover;display:block;border-radius:inherit;}
+  
+  /* detail-sections */
+  .detail-sections{padding:0 0 1rem}
+  .detail-sections .d-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .detail-sections .d-section{padding:2.5rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .detail-sections h2{margin:0 0 .65rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .detail-sections .d-lead{margin:0 0 1rem;color:#5b6475}
+  .detail-sections .d-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.1rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .detail-sections .d-kicker{display:inline-block;margin-bottom:.55rem;padding:.22rem .55rem;border-radius:999px;font-size:.76rem;font-weight:800;background:#eef2ff;color:#3730a3}
+  .detail-sections .d-meta{color:#5b6475;font-size:.95rem}
+  .detail-sections .d-steps{margin:0;padding-left:1.2rem;color:#4b5563}.detail-sections .d-steps li{margin:.45rem 0}
+  .detail-sections .d-quote{font-size:1rem;color:#1f2937}.detail-sections .d-quote footer{margin-top:.65rem;color:#6b7280;font-weight:700;background:none;padding:0;border:0}
+  .detail-sections details{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:14px;padding:.85rem 1rem;margin:.65rem 0}
+  .detail-sections summary{cursor:pointer;font-weight:700}
+  .detail-sections .d-form{display:grid;gap:.75rem}.detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .detail-sections input,.detail-sections select,.detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .detail-sections textarea{min-height:100px;resize:vertical}
+  .detail-sections .d-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .detail-sections .d-cta{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:22px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .detail-sections .d-cta p{color:rgba(255,255,255,.78);margin:0}
+  .detail-sections .d-cta .d-btn{background:#fff;color:#111827}
+  @media (max-width:900px){.detail-sections .d-grid,.detail-sections .d-grid-2{grid-template-columns:1fr}}
+
+  
+  .ux-detail-sections{padding:0 0 1.25rem}.ux-detail-sections .u-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .ux-detail-sections .u-sec{padding:2.4rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .ux-detail-sections h2{margin:0 0 .45rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .ux-detail-sections .u-lead{margin:0 0 1rem;color:#5b6475}
+  .ux-detail-sections .u-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.05rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .ux-detail-sections .u-k{display:inline-block;margin-bottom:.5rem;padding:.22rem .55rem;border-radius:999px;font-size:.75rem;font-weight:800;background:#ecfeff;color:#155e75}
+  .ux-detail-sections .u-muted{color:#5b6475}.ux-detail-sections ul{margin:.65rem 0 0;padding-left:1.2rem;color:#4b5563}
+  .ux-detail-sections .u-metric strong{display:block;font-size:1.35rem;color:#111827}.ux-detail-sections .u-metric span{color:#5b6475;font-size:.92rem}
+  .ux-detail-sections .u-plan{position:relative}.ux-detail-sections .u-plan.featured{border-color:rgba(37,99,235,.28);box-shadow:0 14px 30px rgba(37,99,235,.10)}
+  .ux-detail-sections .u-price{font-size:1.25rem;font-weight:800;color:#111827;margin:.15rem 0 .55rem}
+  .ux-detail-sections .u-gallery{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.75rem}
+  .ux-detail-sections .u-shot{min-height:140px;border-radius:16px;border:1px solid rgba(15,23,42,.08);display:flex;align-items:end;padding:.85rem;font-weight:700;color:#0f172a;background:linear-gradient(135deg,#e2e8f0,#f8fafc)}
+  .ux-detail-sections .u-shot.main{min-height:220px;background:linear-gradient(135deg,#dbeafe,#eff6ff)}
+  .ux-detail-sections .u-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid rgba(15,23,42,.09);border-radius:16px;background:#fff}
+  .ux-detail-sections .u-table th,.ux-detail-sections .u-table td{padding:.8rem .85rem;text-align:left;border-bottom:1px solid rgba(15,23,42,.08);vertical-align:top}
+  .ux-detail-sections .u-table th{background:#f8fafc;font-size:.9rem}.ux-detail-sections .u-table tr:last-child td{border-bottom:0}
+  .ux-detail-sections .u-check{color:#059669;font-weight:800}
+  .ux-detail-sections .u-timeline{display:grid;gap:.75rem}.ux-detail-sections .u-step{display:flex;gap:.75rem;align-items:flex-start}
+  .ux-detail-sections .u-n{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:#111827;color:#fff;font-weight:800;flex:none}
+  .ux-detail-sections .u-form{display:grid;gap:.75rem}.ux-detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .ux-detail-sections input,.ux-detail-sections select,.ux-detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .ux-detail-sections textarea{min-height:96px;resize:vertical}
+  .ux-detail-sections .u-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .ux-detail-sections .u-cta{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-radius:22px;padding:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .ux-detail-sections .u-cta p{margin:0;color:rgba(255,255,255,.78)} .ux-detail-sections .u-cta .u-btn{background:#fff;color:#111827}
+  @media (max-width:980px){.ux-detail-sections .u-grid,.ux-detail-sections .u-grid-4,.ux-detail-sections .u-grid-2,.ux-detail-sections .u-gallery{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion: reduce){.ux-detail-sections *{scroll-behavior:auto}}
+
+
+/* variant-theme:service-plus */
+:root{--bg:#f0fdf4;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#14532d;--muted:#166534;--line:#bbf7d0;--accent:#16a34a;--accent2:#15803d;--cat-accent:#0ea5e9}
+body{background:var(--bg) !important;color:var(--text) !important}
+.card,.panel,article,section .box,.d-card,.u-card,.kpi,.item{background:var(--card) !important;color:var(--text) !important;border-color:var(--line) !important}
+h1,h2,h3,h4{color:var(--text) !important}
+p,.muted,.u-muted,.d-meta,.d-lead,.u-lead{color:var(--muted) !important}
+a.btn.primary,.btn-primary,button.primary{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+.btn,.btn-ghost,a.btn{border-color:var(--line) !important;color:var(--text) !important}
+.hero,.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.cards,.grid,.features,.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.detail-sections,.extra{display:block}
+@media (max-width:900px){.hero,.split,.cards,.grid,.features,.kpis{grid-template-columns:1fr !important}}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head>
+<body>
+  <header><div class="wrap nav"><a class="brand" href="#">PrimeNest Realty</a><nav><a href="#listings">Listings</a><a href="#services">Services</a><a href="#contact">Contact</a><a href="../main/admin.html" style="margin-left:1rem;font-weight:700">Owner/Admin</a></nav></div></header>
+  <main class="wrap">
+    <section class="hero"><div class="hero-box"><h1>Find homes, investments, and trusted property guidance.</h1><p>A real estate sample for listings, filters, property highlights, and agent inquiries. Replace with real inventory, pricing, legal details, and verified contacts.</p><div class="search" aria-label="Search filters sample"><div><strong>Location</strong><span>City / Area</span></div><div><strong>Property Type</strong><span>Apartment / House</span></div><div><strong>Budget</strong><span>Min – Max</span></div><div><a class="btn btn-primary" href="#listings">Search</a></div></div></div></section>
+    <section id="listings"><h2>Featured Listings</h2><div class="grid ui-grid">
+      <article class="card"><div class="img" aria-hidden="true"></div><h3>Modern 2BHK Apartment</h3><p class="meta">[Area] • 2 Bed • 2 Bath • [Size]</p><div class="price">[Price]</div></article>
+      <article class="card"><div class="img" aria-hidden="true"></div><h3>Family Villa</h3><p class="meta">[Area] • 4 Bed • Garden • Parking</p><div class="price">[Price]</div></article>
+      <article class="card"><div class="img" aria-hidden="true"></div><h3>Commercial Space</h3><p class="meta">[Area] • High visibility • Lease/Sale</p><div class="price">[Price]</div></article>
+    </div></section>
+    <section id="services" class="split"><div class="card"><img class="photo" src="../../../../assets/photos/pexels-realestate-1396122.jpg" alt="Sample image" loading="lazy" /><div class="photo-overlay" aria-hidden="true"></div><h2>Services</h2><p>Buying, selling, renting, property management, legal/document guidance, and investment consultation. Add local compliance and disclosure information.</p></div><div class="card" id="contact"><h2>Agent Inquiry</h2><p><strong>Agent:</strong> [Name]<br /><strong>Phone/WhatsApp:</strong> [Number]<br /><strong>Email:</strong> [Email]<br /><strong>Office:</strong> [Address]</p><a class="btn btn-primary" href="#">Schedule Visit</a></div></section>
+  
+  <section class="detail-sections" aria-label="Detailed UI views">
+    <div class="d-wrap">
+      <section class="d-section" id="details-overview">
+        <h2>Detailed UI Views</h2>
+        <p class="d-lead">Additional sample sections for PrimeNest | Real Estate Sample: offerings, process, testimonials, FAQ, contact details, and final CTA. Replace placeholder content with approved business data.</p>
+        <div class="d-grid">
+          <article class="d-card"><span class="d-kicker">Featured Listings / Services</span><h3>Featured Apartment</h3><p class="d-meta">Key specs, location highlights, and sample price.</p></article>
+          <article class="d-card"><span class="d-kicker">Popular</span><h3>Family Home / Villa</h3><p class="d-meta">Space, amenities, and viewing details.</p></article>
+          <article class="d-card"><span class="d-kicker">Custom</span><h3>Commercial / Investment</h3><p class="d-meta">Lease/sale opportunity with inquiry CTA.</p></article>
+        </div>
+      </section>
+      <section class="d-section" id="details-process">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">Process</span><h3>Inquiry Flow</h3><ol class="d-steps"><li>Search or browse listings</li><li>Shortlist properties</li><li>Schedule viewing/call</li><li>Discuss terms and next steps</li></ol></article>
+          <article class="d-card"><span class="d-kicker">Trust</span><h3>Testimonials / Social Proof</h3>
+            <blockquote class="d-quote"><p>“Listings are easy to scan.”</p><footer>— Sample Buyer</footer></blockquote><blockquote class="d-quote"><p>“Clear inquiry and viewing CTA.”</p><footer>— Property Seeker</footer></blockquote><blockquote class="d-quote"><p>“Professional presentation.”</p><footer>— Demo Feedback</footer></blockquote>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-faq">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">FAQ</span><h3>Common Questions</h3>
+            <details><summary>Are prices negotiable?</summary><p class="d-meta">Add listing-specific pricing and terms.</p></details><details><summary>Can I schedule a viewing?</summary><p class="d-meta">Provide agent contact and calendar/form flow.</p></details><details><summary>Do you help with documentation?</summary><p class="d-meta">List verified legal/document services if offered.</p></details>
+          </article>
+          <article class="d-card"><span class="d-kicker">Inquiry</span><h3>Contact / Request Form</h3>
+            <form class="d-form" action="#" method="post"><label>Name<input type="text" name="name" placeholder="Sample Name" /></label><label>Phone / email<input type="text" name="contact" placeholder="+00 00000 00000" /></label><label>Interest<select name="type"><option>Buy</option><option>Rent</option><option>Sell/list</option><option>Site visit</option></select></label><label>Property preference<input type="text" name="pref" placeholder="Location, BHK/type, budget range" /></label><label>Requirements<textarea name="notes" placeholder="Move-in date, amenities, notes"></textarea></label><button class="d-btn" type="submit">Send Enquiry</button></form>
+            <p class="d-meta" style="margin-top:.75rem"><strong>Sample contact:</strong> +00 00000 00000 • contact@sample-business.demo • 123 Sample Street, Demo District</p>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-cta">
+        <div class="d-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">Ready to adapt this sample?</h2><p>Replace dummy data, connect real forms/services, add approved images, and finalize legal/policy content before launch.</p></div><span class="d-btn" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.22)">Use approved project data</span></div>
+      </section>
+    </div>
+  </section>
+
+
+  <section class="ux-detail-sections" aria-label="Enhanced UI/UX views">
+    <div class="u-wrap">
+      <section class="u-sec" id="ux-overview">
+        <h2>Enhanced UI/UX Views</h2>
+        <p class="u-lead">More detailed sample views for PrimeNest | Real Estate Sample: metrics, plans, gallery, comparison, timeline, team, accessibility notes, and conversion-focused CTAs. All values are placeholders.</p>
+        <div class="u-grid-4">
+          <article class="u-card u-metric"><strong>Clear</strong><span>Information</span></article><article class="u-card u-metric"><strong>Fast</strong><span>Contact options</span></article><article class="u-card u-metric"><strong>Trusted</strong><span>Sample presentation</span></article><article class="u-card u-metric"><strong>100%</strong><span>Responsive layout</span></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-plans">
+        <h2>Plans / Packages / Options</h2>
+        <div class="u-grid">
+          <article class="u-card u-plan"><span class="u-k">Option</span><h3>Starter</h3><div class="u-price">[Add price]</div><p class="u-muted">Basic option</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan featured"><span class="u-k">Popular</span><h3>Standard</h3><div class="u-price">[Add price]</div><p class="u-muted">Most common choice</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan"><span class="u-k">Option</span><h3>Custom</h3><div class="u-price">[Add price]</div><p class="u-muted">Tailored to needs</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-gallery">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Gallery / Visuals</span>
+            <h3>Sample Visual Sections</h3>
+            <div class="u-gallery" aria-label="Gallery placeholders">
+              <div class="u-shot main">Primary offering</div>
+              <div class="u-shot">Detail/context</div>
+              <div class="u-shot">Customer experience</div>
+            </div>
+            <p class="u-muted" style="margin-top:.75rem">Use approved local/project images in production. Current samples keep local placeholder assets and dummy copy.</p>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Feature Highlights</span>
+            <h3>UI/UX Components Included</h3>
+            <ul><li>Service/feature cards</li><li>Comparison/pricing UI</li><li>Process timeline</li><li>Testimonials/trust</li><li>FAQ and inquiry form</li><li>Policy/contact details</li></ul>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-compare">
+        <h2>Comparison / Details Table</h2>
+        <table class="u-table" aria-label="Comparison table">
+          <thead><tr><th>Feature</th><th>Basic</th><th>Standard</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><td>Core information</td><td class="u-check">Included</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Detailed visuals/content</td><td>Limited</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Advanced actions (booking/order/inquiry)</td><td>Optional</td><td>Optional</td><td class="u-check">Included</td></tr>
+            <tr><td>Support/follow-up</td><td>Basic</td><td>Standard</td><td>Priority</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="u-sec" id="ux-process-team">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Timeline</span>
+            <h3>Step-by-Step Experience</h3>
+            <div class="u-timeline">
+              <div class="u-step"><span class="u-n">1</span><div><strong>Discover</strong><p class="u-muted">User reviews key info, visuals, and value proposition.</p></div></div>
+              <div class="u-step"><span class="u-n">2</span><div><strong>Compare</strong><p class="u-muted">Plans, features, FAQs, and trust signals support decisions.</p></div></div>
+              <div class="u-step"><span class="u-n">3</span><div><strong>Act</strong><p class="u-muted">Clear CTA leads to contact, booking, order, or inquiry.</p></div></div>
+              <div class="u-step"><span class="u-n">4</span><div><strong>Follow up</strong><p class="u-muted">Confirmation, support, and next steps keep the flow complete.</p></div></div>
+            </div>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Team / Trust</span>
+            <h3>People &amp; Credibility Blocks</h3>
+            <ul><li><strong>Lead Specialist:</strong> Primary service</li><li><strong>Support Team:</strong> Customer assistance</li><li><strong>Operations:</strong> Scheduling and delivery</li></ul>
+            <p class="u-muted" style="margin-top:.75rem">Add verified names, licenses, certifications, policies, and real testimonials before production use.</p>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-access-contact">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Accessibility / UX</span>
+            <h3>Usability Checklist</h3>
+            <ul>
+              <li>Responsive layout for mobile, tablet, and desktop</li>
+              <li>Readable contrast, spacing, and clear visual hierarchy</li>
+              <li>Visible labels/placeholders and action-oriented CTAs</li>
+              <li>Semantic sections, keyboard-friendly controls, and reduced-motion support</li>
+              <li>Placeholder content only — replace with accurate data</li>
+            </ul>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Quick Contact</span>
+            <h3>Conversion Form</h3>
+            <form class="u-form" action="#" method="post"><label>Name<input type="text" name="name" placeholder="Sample Name" /></label><label>Contact<input type="text" name="contact" placeholder="+00 00000 00000" /></label><label>Interest<select name="type"><option>Buy</option><option>Rent</option><option>Visit</option></select></label><label>Preference<textarea name="notes" placeholder="Location/budget"></textarea></label><button class="u-btn" type="submit">Request Details</button></form>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-final">
+        <div class="u-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">More detailed UI/UX sample view</h2><p>This sample now includes richer sections, comparison UI, process/timeline, trust blocks, and conversion-focused forms using dummy placeholders.</p></div><a class="u-btn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top</a></div>
+      </section>
+    </div>
+  </section>
+
+</main>
+  <footer class="wrap">UI sample: Real Estate</footer>
+
+<script>
+(function(){
+  var path = location.pathname.replace(/\\/g,'/');
+  var m = path.match(/\/([^\/]+)\/([^\/]+)\/customer\.html$/);
+  if (!m) return;
+  var key = 'ui_customer_' + m[1] + '_' + m[2];
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    var map = {
+      businessName: ['[data-editable="businessName"]','h1','.brand strong','.brand','.logo-text'],
+      heroTitle: ['[data-editable="heroTitle"]','h1','.hero h1','header h1'],
+      heroSubtitle: ['[data-editable="heroSubtitle"]','.hero p','.subhead','header p','.muted'],
+      contact: ['[data-editable="contact"]','.contact','.phone','[href^="tel:"]'],
+      address: ['[data-editable="address"]','.address','address'],
+      announcement: ['[data-editable="announcement"]','.announcement','.notice','.banner']
+    };
+    Object.keys(map).forEach(function(k){
+      if (!d[k]) return;
+      for (var i=0;i<map[k].length;i++){
+        var el = document.querySelector(map[k][i]);
+        if (el){ el.textContent = d[k]; break; }
+      }
+    });
+    var note = document.querySelector('[data-admin-note]') || document.createElement('div');
+    note.setAttribute('data-admin-note','1');
+    note.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999;max-width:min(360px,calc(100vw - 24px));padding:.65rem .8rem;border-radius:12px;background:#111827;color:#fff;font:600 12px/1.4 system-ui;box-shadow:0 10px 24px rgba(0,0,0,.25)';
+    note.textContent = 'Admin manual edits applied from this browser' + (d.updatedAt ? (' · ' + d.updatedAt) : '') + '.';
+    if (!note.parentNode) document.body.appendChild(note);
+  } catch(e) {}
+})();
+</script>
+
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Printing & Xerox Shop</title>
+  <meta name="description" content="Modern Local Printing Xerox Shop sample for products, collections, and store visits." />
+  <style>
+    :root{--bg:#faf5ff;--ink:#111827;--muted:#6b21a8;--accent:#9333ea;--dark:#1f2937;--card:#fff;--line:#e9d5ff;--shadow:0 16px 34px rgba(17,24,39,.08);--panel:#fff;--text:#3b0764;--accent2:#7e22ce}
+    *{box-sizing:border-box} body{margin:0;font:16px/1.65 system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--bg))}
+    .wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto} header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.95rem 0} .brand{font-weight:800;font-size:1.35rem;text-decoration:none;color:var(--dark)} nav a{text-decoration:none;color:var(--muted);font-weight:700;margin-left:1rem}
+    .hero{padding:4rem 0 2.5rem;display:grid;grid-template-columns:1.05fr .95fr;gap:1.2rem;align-items:center}
+    .tag{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,white);color:var(--dark);font-weight:800}
+    h1,h2,h3{margin:0 0 .7rem;line-height:1.08} h1{font-size:clamp(2.2rem,5vw,4rem);margin-top:1rem} p{margin:0 0 1rem;color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;min-height:44px;padding:.78rem 1.1rem;border-radius:12px;text-decoration:none;font-weight:800} .btn-primary{background:var(--accent);color:#111827} .btn-ghost{background:#fff;border:1px solid rgba(15,23,42,.12);color:#1f2937}
+    .actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
+    .visual,.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+    .visual{min-height:360px;position:relative;overflow:hidden;display:flex;align-items:end;padding:1.25rem} .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover} .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.58))} .vcontent{position:relative;z-index:1;color:#fff} .vcontent p{color:rgba(255,255,255,.88)}
+    section{padding:2.75rem 0} .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem} .card{padding:1.2rem} .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem} .panel{padding:1.25rem}
+    ul{margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted)} footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted)}
+    @media (max-width:900px){.hero,.grid,.split{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start}nav a{margin-left:0;margin-right:1rem}}
+  
+  /* detail-sections */
+  .detail-sections{padding:0 0 1rem}
+  .detail-sections .d-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .detail-sections .d-section{padding:2.5rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .detail-sections h2{margin:0 0 .65rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .detail-sections .d-lead{margin:0 0 1rem;color:#5b6475}
+  .detail-sections .d-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .detail-sections .d-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.1rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .detail-sections .d-kicker{display:inline-block;margin-bottom:.55rem;padding:.22rem .55rem;border-radius:999px;font-size:.76rem;font-weight:800;background:#eef2ff;color:#3730a3}
+  .detail-sections .d-meta{color:#5b6475;font-size:.95rem}
+  .detail-sections .d-steps{margin:0;padding-left:1.2rem;color:#4b5563}.detail-sections .d-steps li{margin:.45rem 0}
+  .detail-sections .d-quote{font-size:1rem;color:#1f2937}.detail-sections .d-quote footer{margin-top:.65rem;color:#6b7280;font-weight:700;background:none;padding:0;border:0}
+  .detail-sections details{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:14px;padding:.85rem 1rem;margin:.65rem 0}
+  .detail-sections summary{cursor:pointer;font-weight:700}
+  .detail-sections .d-form{display:grid;gap:.75rem}.detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .detail-sections input,.detail-sections select,.detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .detail-sections textarea{min-height:100px;resize:vertical}
+  .detail-sections .d-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .detail-sections .d-cta{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:22px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .detail-sections .d-cta p{color:rgba(255,255,255,.78);margin:0}
+  .detail-sections .d-cta .d-btn{background:#fff;color:#111827}
+  @media (max-width:900px){.detail-sections .d-grid,.detail-sections .d-grid-2{grid-template-columns:1fr}}
+
+  
+  .ux-detail-sections{padding:0 0 1.25rem}.ux-detail-sections .u-wrap{width:min(1140px,calc(100% - 2rem));margin:0 auto}
+  .ux-detail-sections .u-sec{padding:2.4rem 0;border-top:1px solid rgba(15,23,42,.08)}
+  .ux-detail-sections h2{margin:0 0 .45rem;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.1}
+  .ux-detail-sections .u-lead{margin:0 0 1rem;color:#5b6475}
+  .ux-detail-sections .u-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .ux-detail-sections .u-card{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.09);border-radius:18px;padding:1.05rem;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .ux-detail-sections .u-k{display:inline-block;margin-bottom:.5rem;padding:.22rem .55rem;border-radius:999px;font-size:.75rem;font-weight:800;background:#ecfeff;color:#155e75}
+  .ux-detail-sections .u-muted{color:#5b6475}.ux-detail-sections ul{margin:.65rem 0 0;padding-left:1.2rem;color:#4b5563}
+  .ux-detail-sections .u-metric strong{display:block;font-size:1.35rem;color:#111827}.ux-detail-sections .u-metric span{color:#5b6475;font-size:.92rem}
+  .ux-detail-sections .u-plan{position:relative}.ux-detail-sections .u-plan.featured{border-color:rgba(37,99,235,.28);box-shadow:0 14px 30px rgba(37,99,235,.10)}
+  .ux-detail-sections .u-price{font-size:1.25rem;font-weight:800;color:#111827;margin:.15rem 0 .55rem}
+  .ux-detail-sections .u-gallery{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.75rem}
+  .ux-detail-sections .u-shot{min-height:140px;border-radius:16px;border:1px solid rgba(15,23,42,.08);display:flex;align-items:end;padding:.85rem;font-weight:700;color:#0f172a;background:linear-gradient(135deg,#e2e8f0,#f8fafc)}
+  .ux-detail-sections .u-shot.main{min-height:220px;background:linear-gradient(135deg,#dbeafe,#eff6ff)}
+  .ux-detail-sections .u-table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid rgba(15,23,42,.09);border-radius:16px;background:#fff}
+  .ux-detail-sections .u-table th,.ux-detail-sections .u-table td{padding:.8rem .85rem;text-align:left;border-bottom:1px solid rgba(15,23,42,.08);vertical-align:top}
+  .ux-detail-sections .u-table th{background:#f8fafc;font-size:.9rem}.ux-detail-sections .u-table tr:last-child td{border-bottom:0}
+  .ux-detail-sections .u-check{color:#059669;font-weight:800}
+  .ux-detail-sections .u-timeline{display:grid;gap:.75rem}.ux-detail-sections .u-step{display:flex;gap:.75rem;align-items:flex-start}
+  .ux-detail-sections .u-n{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;background:#111827;color:#fff;font-weight:800;flex:none}
+  .ux-detail-sections .u-form{display:grid;gap:.75rem}.ux-detail-sections label{display:grid;gap:.3rem;font-weight:600;font-size:.94rem}
+  .ux-detail-sections input,.ux-detail-sections select,.ux-detail-sections textarea{width:100%;min-height:44px;padding:.72rem .82rem;border:1px solid rgba(15,23,42,.16);border-radius:12px;font:inherit;background:#fff}
+  .ux-detail-sections textarea{min-height:96px;resize:vertical}
+  .ux-detail-sections .u-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;border-radius:12px;background:#111827;color:#fff;text-decoration:none;font-weight:800;border:0}
+  .ux-detail-sections .u-cta{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-radius:22px;padding:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .ux-detail-sections .u-cta p{margin:0;color:rgba(255,255,255,.78)} .ux-detail-sections .u-cta .u-btn{background:#fff;color:#111827}
+  @media (max-width:980px){.ux-detail-sections .u-grid,.ux-detail-sections .u-grid-4,.ux-detail-sections .u-grid-2,.ux-detail-sections .u-gallery{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion: reduce){.ux-detail-sections *{scroll-behavior:auto}}
+
+
+/* variant-theme:booking */
+:root{--bg:#faf5ff;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#3b0764;--muted:#6b21a8;--line:#e9d5ff;--accent:#9333ea;--accent2:#7e22ce;--cat-accent:#64748b}
+body{background:var(--bg) !important;color:var(--text) !important}
+.card,.panel,article,section .box,.d-card,.u-card,.kpi,.item{background:var(--card) !important;color:var(--text) !important;border-color:var(--line) !important}
+h1,h2,h3,h4{color:var(--text) !important}
+p,.muted,.u-muted,.d-meta,.d-lead,.u-lead{color:var(--muted) !important}
+a.btn.primary,.btn-primary,button.primary{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+.btn,.btn-ghost,a.btn{border-color:var(--line) !important;color:var(--text) !important}
+.hero{display:grid;grid-template-columns:1fr .95fr;gap:1rem}.cards,.grid,.features,.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem} form,.booking,.contact-form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+@media (max-width:900px){.hero,.split,.cards,.grid,.features,.kpis{grid-template-columns:1fr !important}}
+
+.hero-bg-photo{position:relative;isolation:isolate} .hero-bg-photo:before{content:"";position:absolute;inset:0;background:url("../../../../assets/photos/coworking-space.jpg") center/cover no-repeat;opacity:.18;z-index:-2;border-radius:inherit} .hero-bg-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg,rgba(0,0,0,.55)),transparent 65%);z-index:-1;border-radius:inherit}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head>
+<body>
+  <header><div class="wrap nav"><a class="brand" href="#">Sample Print Shop</a><nav><a href="#services">Services</a><a href="#highlights">Highlights</a><a href="#contact">Contact</a><a href="../main/admin.html" style="margin-left:1rem;font-weight:700">Owner/Admin</a></nav></div></header>
+  <main class="wrap">
+    <section class="hero hero-bg-photo"><div><span class="tag">Local Printing Xerox Shop • Sample UI</span><h1>Document upload/print queue, binding/lamination, bulk notes, and scan-pay counter UI.</h1><p>A Local Printing Xerox Shop sample for local service businesses. Highlight collections, featured products, store info, and promotions.</p><div class="actions"><a class="btn btn-primary" href="#contact">Get Started</a><a class="btn btn-ghost" href="#services">Learn More</a></div></div>
+      <div class="visual" role="img" aria-label="Local Printing Xerox Shop sample image"><img class="photo" src="../../../../assets/photos/coworking-space.jpg" alt="Local Printing Xerox Shop sample photo" loading="lazy" /><div class="overlay" aria-hidden="true"></div><div class="vcontent"><h2>Primary Service</h2><p>Curated styles, seasonal picks, and featured products.</p></div></div></section>
+    <section id="services"><h2>Key Services / Offerings</h2><div class="grid ui-grid"><article class="card"><h3>Key Services</h3><p>Highlight best sellers and new arrivals.</p></article><article class="card"><h3>Service Options</h3><p>Organize by category, season, or style.</p></article><article class="card"><h3>Store Visit</h3><p>Location, hours, and in-store assistance.</p></article></div></section>
+    <section id="highlights" class="split"><div class="panel"><h2>Why Choose Us</h2><ul><li>Clear product presentation and categories</li><li>Promotions and seasonal campaign sections</li><li>Easy contact or e-commerce integration path</li></ul></div><div class="panel" id="contact"><h2>Contact / Inquiry</h2><p><strong>Phone:</strong> +00 00000 00000<br /><strong>Email:</strong> contact@sample-business.demo<br /><strong>Address:</strong> 123 Sample Street, Demo District<br /><strong>Hours:</strong> [Add hours]</p><a class="btn btn-primary" href="#">Send Inquiry</a></div></section>
+  
+  <section class="detail-sections" aria-label="Detailed UI views">
+    <div class="d-wrap">
+      <section class="d-section" id="details-overview">
+        <h2>Detailed UI Views</h2>
+        <p class="d-lead">Additional sample sections for Thread &amp; Co. | Local Printing Xerox Shop Sample: offerings, process, testimonials, FAQ, contact details, and final CTA. Replace placeholder content with approved business data.</p>
+        <div class="d-grid">
+          <article class="d-card"><span class="d-kicker">Service Highlights</span><h3>Primary Service</h3><p class="d-meta">Main service with clear details and quick action.</p></article>
+          <article class="d-card"><span class="d-kicker">Popular</span><h3>Popular Option</h3><p class="d-meta">Frequently requested service with sample trust signals.</p></article>
+          <article class="d-card"><span class="d-kicker">Custom</span><h3>Special Plan</h3><p class="d-meta">Plan, package, or limited-time service option.</p></article>
+        </div>
+      </section>
+      <section class="d-section" id="details-process">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">Process</span><h3>Service Flow</h3><ol class="d-steps"><li>Choose service</li><li>Check details/slot</li><li>Confirm request</li><li>Track or complete service</li></ol></article>
+          <article class="d-card"><span class="d-kicker">Trust</span><h3>Testimonials / Social Proof</h3>
+            <blockquote class="d-quote"><p>“Easy to understand and request.”</p><footer>— Sample Customer</footer></blockquote><blockquote class="d-quote"><p>“Clear and convenient service flow.”</p><footer>— Regular User</footer></blockquote><blockquote class="d-quote"><p>“Helpful details and updates.”</p><footer>— Demo User</footer></blockquote>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-faq">
+        <div class="d-grid-2">
+          <article class="d-card"><span class="d-kicker">FAQ</span><h3>Common Questions</h3>
+            <details><summary>How do I book/request service?</summary><p class="d-meta">Connect e-commerce/cart in production.</p></details><details><summary>What are charges and terms?</summary><p class="d-meta">Add clear policy details.</p></details><details><summary>Do you provide local doorstep service?</summary><p class="d-meta">List address, hours, and contact options.</p></details>
+          </article>
+          <article class="d-card"><span class="d-kicker">Inquiry</span><h3>Contact / Request Form</h3>
+            <form class="d-form" action="#" method="post"><label>Customer name<input type="text" name="name" placeholder="Sample Name" /></label><label>Phone / email<input type="text" name="contact" placeholder="+00 00000 00000" /></label><label>Job type<select name="type"><option>B/W Xerox</option><option>Color print</option><option>Scan</option><option>Binding/lamination</option><option>Bulk notes</option></select></label><label>File/count details<input type="text" name="files" placeholder="PDF name / page count / copies" /></label><label>Instructions<textarea name="notes" placeholder="Single/double side, binding, pickup time"></textarea></label><button class="d-btn" type="submit">Submit Print Job</button></form>
+            <p class="d-meta" style="margin-top:.75rem"><strong>Sample contact:</strong> +00 00000 00000 • contact@sample-business.demo • 123 Sample Street, Demo District</p>
+          </article>
+        </div>
+      </section>
+      <section class="d-section" id="details-cta">
+        <div class="d-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">Ready to adapt this sample?</h2><p>Replace dummy data, connect real forms/services, add approved images, and finalize legal/policy content before launch.</p></div><span class="d-btn" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.22)">Use approved project data</span></div>
+      </section>
+    </div>
+  </section>
+
+
+  <section class="ux-detail-sections" aria-label="Enhanced UI/UX views">
+    <div class="u-wrap">
+      <section class="u-sec" id="ux-overview">
+        <h2>Enhanced UI/UX Views</h2>
+        <p class="u-lead">More detailed sample views for Thread &amp; Co. | Local Printing Xerox Shop Sample: metrics, plans, gallery, comparison, timeline, team, accessibility notes, and conversion-focused CTAs. All values are placeholders.</p>
+        <div class="u-grid-4">
+          <article class="u-card u-metric"><strong>New</strong><span>Service options</span></article><article class="u-card u-metric"><strong>Easy</strong><span>Request service</span></article><article class="u-card u-metric"><strong>Secure</strong><span>Action-ready layout</span></article><article class="u-card u-metric"><strong>100%</strong><span>Responsive layout</span></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-plans">
+        <h2>Plans / Packages / Options</h2>
+        <div class="u-grid">
+          <article class="u-card u-plan"><span class="u-k">Option</span><h3>Basic Plan</h3><div class="u-price">[Add price]</div><p class="u-muted">Essential service</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan featured"><span class="u-k">Popular</span><h3>Standard Plan</h3><div class="u-price">[Add price]</div><p class="u-muted">Most requested option</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article><article class="u-card u-plan"><span class="u-k">Option</span><h3>Custom Plan</h3><div class="u-price">[Add price]</div><p class="u-muted">Tailored to needs</p><ul><li>Clear scope/details</li><li>Dummy placeholder content</li><li>Primary CTA/action</li></ul></article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-gallery">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Gallery / Visuals</span>
+            <h3>Sample Visual Sections</h3>
+            <div class="u-gallery" aria-label="Gallery placeholders">
+              <div class="u-shot main">Primary service</div>
+              <div class="u-shot">Service details</div>
+              <div class="u-shot">Customer/result view</div>
+            </div>
+            <p class="u-muted" style="margin-top:.75rem">Use approved local/project images in production. Current samples keep local placeholder assets and dummy copy.</p>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Feature Highlights</span>
+            <h3>UI/UX Components Included</h3>
+            <ul><li>Service/plan cards</li><li>Slot/filter controls</li><li>Status/reminders</li><li>Service area/contact</li><li>Timing/visit notes</li><li>Reviews and trust</li></ul>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-compare">
+        <h2>Comparison / Details Table</h2>
+        <table class="u-table" aria-label="Comparison table">
+          <thead><tr><th>Feature</th><th>Basic</th><th>Standard</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><td>Core information</td><td class="u-check">Included</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Detailed visuals/content</td><td>Limited</td><td class="u-check">Included</td><td class="u-check">Included</td></tr>
+            <tr><td>Advanced actions (booking/order/inquiry)</td><td>Optional</td><td>Optional</td><td class="u-check">Included</td></tr>
+            <tr><td>Support/follow-up</td><td>Basic</td><td>Standard</td><td>Priority</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="u-sec" id="ux-process-team">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Timeline</span>
+            <h3>Step-by-Step Experience</h3>
+            <div class="u-timeline">
+              <div class="u-step"><span class="u-n">1</span><div><strong>Discover</strong><p class="u-muted">User reviews key info, visuals, and value proposition.</p></div></div>
+              <div class="u-step"><span class="u-n">2</span><div><strong>Compare</strong><p class="u-muted">Plans, features, FAQs, and trust signals support decisions.</p></div></div>
+              <div class="u-step"><span class="u-n">3</span><div><strong>Act</strong><p class="u-muted">Clear CTA leads to contact, booking, order, or inquiry.</p></div></div>
+              <div class="u-step"><span class="u-n">4</span><div><strong>Follow up</strong><p class="u-muted">Confirmation, support, and next steps keep the flow complete.</p></div></div>
+            </div>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Team / Trust</span>
+            <h3>People &amp; Credibility Blocks</h3>
+            <ul><li><strong>Store Manager:</strong> Operations and support</li><li><strong>Product Curator:</strong> Collections and merchandising</li><li><strong>Customer Care:</strong> Orders and inquiries</li></ul>
+            <p class="u-muted" style="margin-top:.75rem">Add verified names, licenses, certifications, policies, and real testimonials before production use.</p>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-access-contact">
+        <div class="u-grid-2">
+          <article class="u-card">
+            <span class="u-k">Accessibility / UX</span>
+            <h3>Usability Checklist</h3>
+            <ul>
+              <li>Responsive layout for mobile, tablet, and desktop</li>
+              <li>Readable contrast, spacing, and clear visual hierarchy</li>
+              <li>Visible labels/placeholders and action-oriented CTAs</li>
+              <li>Semantic sections, keyboard-friendly controls, and reduced-motion support</li>
+              <li>Placeholder content only — replace with accurate data</li>
+            </ul>
+          </article>
+          <article class="u-card">
+            <span class="u-k">Quick Contact</span>
+            <h3>Conversion Form</h3>
+            <form class="u-form" action="#" method="post"><label>Name<input type="text" name="name" placeholder="Sample Name" /></label><label>Job<select name="type"><option>Xerox</option><option>Print</option><option>Scan</option><option>Binding</option></select></label><label>Copies/Pages<input type="text" name="count" placeholder="e.g. 20 copies" /></label><label>Notes<textarea name="notes" placeholder="Pickup/payment notes"></textarea></label><button class="u-btn" type="submit">Send Job</button></form>
+          </article>
+        </div>
+      </section>
+      <section class="u-sec" id="ux-final">
+        <div class="u-cta"><div><h2 style="margin:0 0 .25rem;color:#fff">More detailed UI/UX sample view</h2><p>This sample now includes richer sections, comparison UI, process/timeline, trust blocks, and conversion-focused forms using dummy placeholders.</p></div><a class="u-btn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top</a></div>
+      </section>
+    </div>
+  </section>
+
+</main>
+  <footer class="wrap">UI sample: Local Printing Xerox Shop. Replace placeholders with real business data before production use.</footer>
+
+<script>
+(function(){
+  var path = location.pathname.replace(/\\/g,'/');
+  var m = path.match(/\/([^\/]+)\/([^\/]+)\/customer\.html$/);
+  if (!m) return;
+  var key = 'ui_customer_' + m[1] + '_' + m[2];
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    var map = {
+      businessName: ['[data-editable="businessName"]','h1','.brand strong','.brand','.logo-text'],
+      heroTitle: ['[data-editable="heroTitle"]','h1','.hero h1','header h1'],
+      heroSubtitle: ['[data-editable="heroSubtitle"]','.hero p','.subhead','header p','.muted'],
+      contact: ['[data-editable="contact"]','.contact','.phone','[href^="tel:"]'],
+      address: ['[data-editable="address"]','.address','address'],
+      announcement: ['[data-editable="announcement"]','.announcement','.notice','.banner']
+    };
+    Object.keys(map).forEach(function(k){
+      if (!d[k]) return;
+      for (var i=0;i<map[k].length;i++){
+        var el = document.querySelector(map[k][i]);
+        if (el){ el.textContent = d[k]; break; }
+      }
+    });
+    var note = document.querySelector('[data-admin-note]') || document.createElement('div');
+    note.setAttribute('data-admin-note','1');
+    note.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999;max-width:min(360px,calc(100vw - 24px));padding:.65rem .8rem;border-radius:12px;background:#111827;color:#fff;font:600 12px/1.4 system-ui;box-shadow:0 10px 24px rgba(0,0,0,.25)';
+    note.textContent = 'Admin manual edits applied from this browser' + (d.updatedAt ? (' · ' + d.updatedAt) : '') + '.';
+    if (!note.parentNode) document.body.appendChild(note);
+  } catch(e) {}
+})();
+</script>
+
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body>
+</html>

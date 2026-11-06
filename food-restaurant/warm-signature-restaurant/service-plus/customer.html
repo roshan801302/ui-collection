@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ember &amp; Olive | Food Restaurant</title>
+  <meta name="description" content="Ember & Olive is a warm neighborhood restaurant serving seasonal dishes, wood-fired favorites, and handcrafted desserts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --mustard: #f4a900;
+      --terracotta: #c1666b;
+      --beige: #f3e6d3;
+      --beige-deep: #d4b896;
+      --brown: #4a403a;
+      --cream: #fffaf3;
+      --surface: #ffffff;
+      --ring: rgba(244, 169, 0, 0.35);
+      --shadow: 0 12px 30px rgba(74, 64, 58, 0.12);
+      --radius: 18px;
+      --container: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, -apple-system, Segoe UI, sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at top left, rgba(244, 169, 0, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(193, 102, 107, 0.12), transparent 24%),
+        var(--cream);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .container {
+      width: min(calc(100% - 2rem), var(--container));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 0.75rem;
+      top: -3rem;
+      background: var(--brown);
+      color: #fff;
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
+      z-index: 20;
+    }
+    .skip-link:focus { top: 0.75rem; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 250, 243, 0.88);
+      border-bottom: 1px solid rgba(74, 64, 58, 0.08);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--mustard), var(--terracotta));
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: rgba(74, 64, 58, 0.88);
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 44px;
+      padding: 0.75rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+    }
+    .btn-primary {
+      background: var(--mustard);
+      color: #2f261f;
+      box-shadow: 0 10px 22px rgba(244, 169, 0, 0.28);
+    }
+    .btn-primary:hover { background: #ffb70d; }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(74, 64, 58, 0.14);
+    }
+
+    main section { padding: 4.5rem 0; }
+    .hero {
+      padding-top: 3.5rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(244, 169, 0, 0.16);
+      color: #6b4a00;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    h1, h2, h3 {
+      font-family: Fraunces, Georgia, serif;
+      line-height: 1.1;
+      margin: 0 0 0.8rem;
+    }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.4rem); margin-top: 1rem; }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.7rem); }
+    h3 { font-size: 1.25rem; }
+    .lead {
+      font-size: 1.15rem;
+      color: rgba(74, 64, 58, 0.88);
+      max-width: 58ch;
+      margin: 0 0 1.4rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+    .meta-card, .panel, .menu-card, .quote {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(74, 64, 58, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .meta-card { padding: 1rem; }
+    .meta-card strong { display: block; font-size: 1.05rem; }
+    .meta-card span { color: rgba(74, 64, 58, 0.78); font-size: 0.95rem; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 420px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(74, 64, 58, 0.18), rgba(74, 64, 58, 0.48)),
+        radial-gradient(circle at 20% 20%, #ffd36b, transparent 28%),
+        radial-gradient(circle at 80% 30%, #e88b70, transparent 24%),
+        linear-gradient(135deg, #c1666b, #8a5a44 55%, #4a403a);
+      box-shadow: 0 22px 45px rgba(74, 64, 58, 0.22);
+      padding: 1.5rem;
+      display: flex;
+      align-items: end;
+    }
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+    .plate {
+      position: relative;
+      width: 100%;
+      color: #fff;
+    }
+    .plate-badge {
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .plate h2 { color: #fff; margin-bottom: 0.35rem; }
+    .plate p { margin: 0; color: rgba(255, 255, 255, 0.9); max-width: 34ch; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .section-head p {
+      margin: 0;
+      color: rgba(74, 64, 58, 0.78);
+      max-width: 52ch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .menu-card { padding: 1.25rem; }
+    .tag {
+      display: inline-flex;
+      margin-bottom: 0.65rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: var(--beige);
+      color: #6a4f2f;
+    }
+    .price {
+      margin-top: 0.9rem;
+      font-weight: 800;
+      color: var(--terracotta);
+      font-size: 1.05rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .panel { padding: 1.4rem; }
+    .list {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+    .list li {
+      padding: 0.85rem 0.95rem;
+      border-radius: 14px;
+      background: rgba(243, 230, 211, 0.55);
+    }
+    .list strong { display: block; }
+
+    .quote {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(244, 169, 0, 0.12), rgba(255, 255, 255, 0.9));
+    }
+    .quote p { margin: 0 0 0.8rem; font-size: 1.08rem; }
+    .quote footer { font-weight: 700; color: rgba(74, 64, 58, 0.8); }
+
+    form {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+    label {
+      display: grid;
+      gap: 0.35rem;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.75rem 0.85rem;
+      border-radius: 12px;
+      border: 1px solid rgba(74, 64, 58, 0.18);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--brown);
+      font: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    input:focus, select:focus, textarea:focus {
+      outline: 3px solid var(--ring);
+      border-color: rgba(244, 169, 0, 0.7);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    .form-note {
+      margin: 0.25rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(74, 64, 58, 0.76);
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: rgba(74, 64, 58, 0.8);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(74, 64, 58, 0.1);
+      padding-top: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .split, .grid-3 { grid-template-columns: 1fr; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+    @media (max-width: 640px) {
+      main section { padding: 3.5rem 0; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 0.75rem 1rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 320px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  .photo{width:100%;height:100%;min-height:inherit;object-fit:cover;display:block;border-radius:inherit;}
+  
+/* variant-theme:service-plus */
+:root{--bg:#f0fdf4;--card:#fff;--panel:#fff;--panel2:color-mix(in srgb,#fff, black 6%);--text:#14532d;--muted:#166534;--line:#bbf7d0;--accent:#16a34a;--accent2:#15803d;--cat-accent:#f97316}
+body{background:var(--bg) !important;color:var(--text) !important}
+.card,.panel,article,section .box,.d-card,.u-card,.kpi,.item{background:var(--card) !important;color:var(--text) !important;border-color:var(--line) !important}
+h1,h2,h3,h4{color:var(--text) !important}
+p,.muted,.u-muted,.d-meta,.d-lead,.u-lead{color:var(--muted) !important}
+a.btn.primary,.btn-primary,button.primary{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+.btn,.btn-ghost,a.btn{border-color:var(--line) !important;color:var(--text) !important}
+.hero,.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.cards,.grid,.features,.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.detail-sections,.extra{display:block}
+@media (max-width:900px){.hero,.split,.cards,.grid,.features,.kpis{grid-template-columns:1fr !important}}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Ember and Olive home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span>Ember &amp; Olive</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#menu">Menu</a>
+        <a href="#specials">Specials</a>
+        <a href="#about">About</a>
+        <a href="#reserve" class="btn btn-primary">Reserve a Table</a>
+      <a href="../main/admin.html" style="margin-left:1rem;font-weight:700">Owner/Admin</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Seasonal kitchen • Open daily</span>
+          <h1>Comfort food with a warm, modern glow.</h1>
+          <p class="lead">Ember &amp; Olive serves wood-fired plates, fresh pastas, and bright seasonal flavors in a space made for slow dinners, quick lunches, and celebrations worth lingering over.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#reserve">Book a Reservation</a>
+            <a class="btn btn-secondary" href="#menu">Explore the Menu</a>
+          </div>
+          <div class="hero-meta" aria-label="Restaurant highlights">
+            <div class="meta-card">
+              <strong>11:00 AM – 10:00 PM</strong>
+              <span>Lunch, dinner, and weekend brunch</span>
+            </div>
+            <div class="meta-card">
+              <strong>Farm to Table</strong>
+              <span>Local produce and seasonal specials</span>
+            </div>
+            <div class="meta-card">
+              <strong>Downtown District</strong>
+              <span>Easy pickup and cozy dine-in seating</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" role="img" aria-label="Warm restaurant scene highlighting a featured wood-fired dish" style="padding:0;overflow:hidden;position:relative;"><img class="photo" src="../../../../assets/photos/fine-dining.jpg" alt="Restaurant table with plated dishes" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Menu Highlights</h2>
+            <p>Simple, satisfying dishes built around fresh ingredients and bold flavor.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="menu-card">
+            <span class="tag">Starter</span>
+            <h3>Roasted Tomato Bruschetta</h3>
+            <p>Grilled sourdough, basil oil, whipped ricotta, and slow-roasted cherry tomatoes.</p>
+            <div class="price">$9</div>
+          </article>
+          <article class="menu-card">
+            <span class="tag">Service Plus</span>
+            <h3>Truffle Mushroom Pasta</h3>
+            <p>Fresh tagliatelle, wild mushrooms, parmesan cream, and cracked black pepper.</p>
+            <div class="price">$18</div>
+          </article>
+          <article class="menu-card">
+            <span class="tag">Dessert</span>
+            <h3>Honey Citrus Tart</h3>
+            <p>Buttery crust, citrus custard, toasted almond, and a drizzle of local honey.</p>
+            <div class="price">$8</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="specials">
+      <div class="container split">
+        <div class="panel">
+          <h2>Today's Specials</h2>
+          <p>Crafted each morning by our kitchen team based on what's fresh and in season.</p>
+          <ul class="list">
+            <li>
+              <strong>Wood-Fired Sea Bass</strong>
+              Served with fennel salad, saffron potatoes, and preserved lemon.
+            </li>
+            <li>
+              <strong>Spiced Pumpkin Soup</strong>
+              Finished with chili oil, toasted seeds, and warm country bread.
+            </li>
+            <li>
+              <strong>Garden Herb Flatbread</strong>
+              Mozzarella, caramelized onion, arugula, and balsamic glaze.
+            </li>
+          </ul>
+        </div>
+        <aside class="quote" aria-label="Guest review">
+          <p>“The atmosphere feels welcoming the moment you walk in, and every dish tastes like it was made with care. Ember &amp; Olive is our new favorite dinner spot.”</p>
+          <footer>— Local guest review</footer>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container split">
+        <div class="panel">
+          <h2>About Ember &amp; Olive</h2>
+          <p>We believe good food should feel both familiar and memorable. Our kitchen blends rustic comfort with thoughtful presentation, using seasonal ingredients, house-made sauces, and warm hospitality.</p>
+          <p>Whether you're joining us for a family meal, date night, or a quick lunch, we aim to make every visit relaxed, flavorful, and welcoming.</p>
+        </div>
+        <div class="panel">
+          <h2>Visit Us</h2>
+          <ul class="list">
+            <li>
+              <strong>Address</strong>
+              123 Sample Street, Demo District
+            </li>
+            <li>
+              <strong>Phone</strong>
+              <a href="tel:+00 00000 00000">+00 00000 00000</a>
+            </li>
+            <li>
+              <strong>Email</strong>
+              <a href="mailto:contact@sample-restaurant.demo">contact@sample-restaurant.demo</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="reserve">
+      <div class="container">
+        <div class="panel">
+          <h2>Reserve a Table</h2>
+          <p>Send a reservation request and our team will confirm availability.</p>
+          <form action="#" method="post">
+            <div class="form-row">
+              <label for="name">
+                Full name
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </label>
+              <label for="phone">
+                Phone number
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label for="date">
+                Date
+                <input id="date" name="date" type="date" required />
+              </label>
+              <label for="guests">
+                Guests
+                <select id="guests" name="guests" required>
+                  <option value="">Select</option>
+                  <option>1 guest</option>
+                  <option>2 guests</option>
+                  <option>3 guests</option>
+                  <option>4 guests</option>
+                  <option>5 guests</option>
+                  <option>6+ guests</option>
+                </select>
+              </label>
+            </div>
+            <label for="notes">
+              Special requests
+              <textarea id="notes" name="notes" placeholder="Allergies, occasion, seating preference"></textarea>
+            </label>
+            <div>
+              <button class="btn btn-primary" type="submit">Request Reservation</button>
+              <p class="form-note">This demo form does not submit to a backend.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>&copy; 2026 Ember &amp; Olive. Crafted for warm gatherings.</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var path = location.pathname.replace(/\\/g,'/');
+  var m = path.match(/\/([^\/]+)\/([^\/]+)\/customer\.html$/);
+  if (!m) return;
+  var key = 'ui_customer_' + m[1] + '_' + m[2];
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    var map = {
+      businessName: ['[data-editable="businessName"]','h1','.brand strong','.brand','.logo-text'],
+      heroTitle: ['[data-editable="heroTitle"]','h1','.hero h1','header h1'],
+      heroSubtitle: ['[data-editable="heroSubtitle"]','.hero p','.subhead','header p','.muted'],
+      contact: ['[data-editable="contact"]','.contact','.phone','[href^="tel:"]'],
+      address: ['[data-editable="address"]','.address','address'],
+      announcement: ['[data-editable="announcement"]','.announcement','.notice','.banner']
+    };
+    Object.keys(map).forEach(function(k){
+      if (!d[k]) return;
+      for (var i=0;i<map[k].length;i++){
+        var el = document.querySelector(map[k][i]);
+        if (el){ el.textContent = d[k]; break; }
+      }
+    });
+    var note = document.querySelector('[data-admin-note]') || document.createElement('div');
+    note.setAttribute('data-admin-note','1');
+    note.style.cssText='position:fixed;right:12px;bottom:12px;z-index:9999;max-width:min(360px,calc(100vw - 24px));padding:.65rem .8rem;border-radius:12px;background:#111827;color:#fff;font:600 12px/1.4 system-ui;box-shadow:0 10px 24px rgba(0,0,0,.25)';
+    note.textContent = 'Admin manual edits applied from this browser' + (d.updatedAt ? (' · ' + d.updatedAt) : '') + '.';
+    if (!note.parentNode) document.body.appendChild(note);
+  } catch(e) {}
+})();
+</script>
+
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body>
+</html>

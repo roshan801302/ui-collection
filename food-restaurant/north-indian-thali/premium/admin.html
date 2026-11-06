@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>North Indian Thali Admin</title>
+<meta name="description" content="Reservations, table/orders, kitchen flow, menu availability, and billing."/>
+<style>:root{--bg:#0f172a;--panel:#111827;--panel2:color-mix(in srgb,#111827, white 6%);--card:#111827;--line:rgba(148,163,184,.18);--text:#f8fafc;--muted:#94a3b8;--accent:#d4af37;--accent2:#f59e0b;--cat-accent:#f97316;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--btn-text:#ffffff}
+*{box-sizing:border-box} body{margin:0;font:15px/1.5 Inter,system-ui,sans-serif;color:var(--text);background:var(--bg)}
+a{color:inherit;text-decoration:none} .app{display:grid;min-height:100vh}
+.sidebar{padding:1rem;border-right:1px solid var(--line);background:color-mix(in srgb,var(--panel),transparent 20%);position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:.75rem;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--line);margin-bottom:1rem}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent),#fff 25%));display:grid;place-items:center;color:#08101f;font-weight:900}
+.nav a{display:flex;gap:.4rem;align-items:center;padding:.7rem .8rem;border-radius:12px;color:var(--muted);margin:.15rem 0}
+.nav a.active,.nav a:hover{background:color-mix(in srgb,var(--panel2),transparent 15%);color:var(--text)}
+.main{padding:1.1rem 1.2rem 2rem} h1,h2,h3{margin:0 0 .45rem;line-height:1.15} p{margin:0;color:var(--muted)}
+.card{background:linear-gradient(180deg,color-mix(in srgb,var(--panel2),transparent 35%),var(--panel));border:1px solid var(--line);border-radius:18px}
+.pad{padding:1rem} .muted{color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem;margin:1rem 0}
+.kpi strong{display:block;font-size:1.35rem;color:var(--text)}
+.layout,.cols{display:grid;gap:1rem;margin:1rem 0}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:separate;border-spacing:0} th,td{padding:.68rem .7rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.02em} tr:last-child td{border-bottom:0}
+.badge{display:inline-flex;padding:.18rem .5rem;border-radius:999px;font-size:.74rem;font-weight:700}
+.badge.ok{background:rgba(34,197,94,.14);color:var(--good)} .badge.warn{background:rgba(245,158,11,.14);color:var(--warn)} .badge.pending{background:rgba(148,163,184,.14);color:var(--muted)}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:.55rem .85rem;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:transparent;color:#fff}
+.list{display:grid;gap:.55rem;margin-top:.7rem}.item,.ticket,.slot{display:flex;justify-content:space-between;gap:.75rem;padding:.68rem;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--panel2),transparent 35%)}
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}.lane{background:color-mix(in srgb,var(--panel2),transparent 45%);border:1px solid var(--line);border-radius:14px;padding:.75rem;display:grid;gap:.55rem;align-content:start}
+.lane h3{font-size:.92rem}.ticket{display:grid;gap:.15rem;justify-content:stretch}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.45rem}.day{border:1px solid var(--line);border-radius:12px;padding:.55rem;min-height:72px;background:color-mix(in srgb,var(--panel2),transparent 40%)}.day.skip{outline:1px solid rgba(245,158,11,.25)}.day.ok{outline:1px solid rgba(34,197,94,.18)}
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:.75rem 0}
+.toolbar input,.toolbar select,input,select,textarea{min-height:40px;padding:.6rem .75rem;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit}
+.editor{display:grid;gap:.7rem;margin-top:.7rem}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem}
+.editor label{display:grid;gap:.25rem;font-weight:700;font-size:.9rem}.editor textarea{min-height:84px;resize:vertical}
+.notice{padding:.7rem .85rem;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel2),transparent 25%);color:var(--muted)}
+.notice.ok{color:var(--good);border-color:rgba(34,197,94,.22);background:rgba(34,197,94,.08)}
+.module .head{display:flex;justify-content:space-between;gap:.5rem;align-items:center;margin-bottom:.6rem}
+@media (max-width:980px){.app{display:block !important}.sidebar{position:static !important;height:auto !important;border-right:0;border-bottom:1px solid var(--line)}.kpis,.layout,.cols,.cal{grid-template-columns:1fr !important}.nav{display:flex;flex-wrap:wrap}}
+
+body{background:linear-gradient(180deg,#111,var(--bg))}.app{grid-template-columns:280px 1fr}.card{border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+@media (max-width:980px){.app{display:block !important}.sidebar{position:static !important;height:auto !important;border-right:0;border-bottom:1px solid var(--line)}.kpis,.layout,.cols{grid-template-columns:1fr !important}.nav{display:flex;flex-wrap:wrap}}
+
+/* cohesive-variant:premium */
+body{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 8%,var(--bg)),var(--bg))}.app{grid-template-columns:280px 1fr}.card{border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
+@media (max-width:980px){.app{display:block !important}.sidebar{position:static !important;height:auto !important;border-right:0;border-bottom:1px solid var(--line)}.kpis,.layout,.cols{grid-template-columns:1fr !important}.nav{display:flex;flex-wrap:wrap}}
+</style>
+<link rel="stylesheet" href="../../../../assets/ui-enhance/ui-enhance.css"/>
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">AD</div><div><strong style="display:block">North Indian Thali</strong><small class="muted">Owner admin</small></div></div>
+    <nav class="nav"><a class="active" href="#dashboard"><span class="label">Dashboard</span></a><a class="" href="#workflow"><span class="label">Floor/Order Board</span></a><a class="" href="#records"><span class="label">Reservations &amp; Orders</span></a><a class="" href="#mod3"><span class="label">Menu &amp; Prep</span></a><a class="" href="#mod4"><span class="label">Billing &amp; Reviews</span></a><a class="" href="#settings"><span class="label">Settings</span></a><a href="./customer.html" style="margin-top:.5rem"><span class="label">View Customer Panel</span></a></nav>
+  </aside>
+  <main class="main">
+    <div class="toolbar"><div><h1>North Indian Thali Admin</h1><p class="muted">Reservations, table/orders, kitchen flow, menu availability, and billing.</p></div><div class="actions"><input type="search" placeholder="Search..." aria-label="Search"/><button class="btn primary">New Action</button></div></div>
+    <section id="dashboard"></section>
+    <section class="kpis"><article class="card pad kpi"><strong>18</strong><span>Reservations Today</span></article><article class="card pad kpi"><strong>12</strong><span>Active Tables/Orders</span></article><article class="card pad kpi"><strong>7</strong><span>Kitchen Queue</span></article><article class="card pad kpi"><strong>₹[Amount]</strong><span>Revenue (demo)</span></article></section><div class="layout"><section class="card pad module" id="workflow"><div class="head"><h2>Floor / Order Board</h2></div><div class="board"><div class="lane"><h3>Reservations</h3><div class="ticket"><strong>Table 4</strong><div class="muted">7:30 PM · 4 guests</div></div><div class="ticket"><strong>Table 2</strong><div class="muted">8:00 PM · Confirmed</div></div></div><div class="lane"><h3>Kitchen</h3><div class="ticket"><strong>Order 118</strong><div class="muted">Preparing</div></div><div class="ticket"><strong>Order 119</strong><div class="muted">Plating</div></div></div><div class="lane"><h3>Ready/Served</h3><div class="ticket"><strong>Order 115</strong><div class="muted">Served</div></div><div class="ticket"><strong>Order 116</strong><div class="muted">Bill requested</div></div></div></div></section><section class="card pad module" ><div class="head"><h2>Actions &amp; Alerts</h2></div><div class="actions"><button class="btn primary">New Entry</button><button class="btn ">Update Status</button><button class="btn ">Assign / Schedule</button><button class="btn ">Export</button></div><div class="list"><div class="item"><span>Priority focus</span><span class="muted">Review pending items</span></div><div class="item"><span>Customer updates</span><span class="muted">Demo notifications</span></div><div class="item"><span>Daily summary</span><span class="muted">Available</span></div></div></section></div>
+<section class="card pad module" id="records"><div class="head"><h2>Reservations &amp; Orders</h2></div><div class="table-wrap"><table><thead><tr><th>Ref</th><th>Guest</th><th>Time/Type</th><th>Details</th><th>Status</th></tr></thead><tbody><tr><td>#R-41</td><td>Sample Guest</td><td>7:30 PM dine-in</td><td>4 guests, window</td><td><span class="badge ok">Confirmed</span></td></tr><tr><td>#O-118</td><td>Takeaway</td><td>Now</td><td>2 items</td><td><span class="badge pending">Preparing</span></td></tr><tr><td>#O-116</td><td>Table 3</td><td>Served</td><td>Bill requested</td><td><span class="badge warn">Pending payment</span></td></tr></tbody></table></div></section><div class="cols"><section class="card pad module" id="mod3"><div class="head"><h2>Menu &amp; Prep</h2></div><div class="table-wrap"><table><thead><tr><th>Item</th><th>Category</th><th>Availability</th><th>Prep Note</th><th>Status</th></tr></thead><tbody><tr><td>Signature item</td><td>Main</td><td>Available</td><td>Fast prep</td><td><span class="badge ok">Active</span></td></tr><tr><td>Special</td><td>Chef special</td><td>Limited</td><td>Prep 20 min</td><td><span class="badge warn">Low</span></td></tr><tr><td>Dessert</td><td>Dessert</td><td>Available</td><td>—</td><td><span class="badge ok">Active</span></td></tr></tbody></table></div></section><section class="card pad module" id="mod4"><div class="head"><h2>Billing &amp; Feedback</h2></div><div class="list"><div class="item"><span>Pending bills</span><span class="muted">2 tables (demo)</span></div><div class="item"><span>Average rating</span><span class="muted">4.7/5 (demo)</span></div><div class="item"><span>Special requests</span><span class="muted">Allergy/occasion notes captured</span></div></div></section></div>
+    <section class="card pad module" id="customer-panel-editor" data-storage-key="ui_customer_north-indian-thali_premium" style="margin-top:1rem">
+  <h2>Edit Customer Panel</h2>
+  <p class="muted">Admins can manually update the linked customer panel content. Changes are saved in this browser (localStorage) and applied to <a href="./customer.html">customer.html</a>.</p>
+  <form class="editor" onsubmit="return saveCustomerPanel(event)">
+    <div class="row2"><label>Business / page name <input name="businessName" placeholder="North Indian Thali"/></label><label>Hero title <input name="heroTitle" placeholder="Welcome to North Indian Thali"/></label></div>
+    <label>Hero subtitle / description <textarea name="heroSubtitle" placeholder="Short description shown to customers"></textarea></label>
+    <div class="row2"><label>Primary contact <input name="contact" placeholder="+00 00000 00000 / contact@sample-business.demo"/></label><label>Address / location <input name="address" placeholder="123 Sample Street, Demo District"/></label></div>
+    <label>Announcement / notice <textarea name="announcement" placeholder="Optional notice shown on customer panel"></textarea></label>
+    <div class="actions"><button class="btn primary" type="submit">Save to Customer Panel</button><button class="btn" type="button" onclick="loadCustomerPanelEditor()">Reload Saved</button><button class="btn" type="button" onclick="resetCustomerPanelEditor()">Reset Defaults</button><a class="btn" href="./customer.html" target="_blank" rel="noopener">Open Customer Panel</a></div>
+    <div id="customer-panel-editor-status" class="notice">No saved edits yet for this sample.</div>
+  </form>
+</section>
+<script>
+(function(){ var key="ui_customer_north-indian-thali_premium"; function q(s,r){return (r||document).querySelector(s)} function form(){return q('#customer-panel-editor form')} function status(m,ok){var el=q('#customer-panel-editor-status'); if(el){el.textContent=m; el.className='notice'+(ok?' ok':'')}} window.loadCustomerPanelEditor=function(){try{var raw=localStorage.getItem(key); if(!raw){status('No saved edits yet for this sample.'); return} var d=JSON.parse(raw),f=form(); if(!f) return; ['businessName','heroTitle','heroSubtitle','contact','address','announcement'].forEach(function(k){if(f[k]&&d[k]!=null) f[k].value=d[k]}); status('Loaded saved edits from this browser.',true)}catch(e){status('Could not load saved edits.')}}; window.saveCustomerPanel=function(e){if(e)e.preventDefault(); var f=form(); if(!f) return false; var d={updatedAt:new Date().toLocaleString()}; ['businessName','heroTitle','heroSubtitle','contact','address','announcement'].forEach(function(k){d[k]=f[k]?f[k].value:''}); localStorage.setItem(key,JSON.stringify(d)); status('Saved. Open the customer panel to see updates in this browser.',true); return false}; window.resetCustomerPanelEditor=function(){localStorage.removeItem(key); var f=form(); if(f) f.reset(); status('Saved edits cleared for this sample.')}; loadCustomerPanelEditor(); })();
+</script>
+  </main>
+</div>
+<script src="../../../../assets/ui-enhance/ui-enhance.js" defer></script>
+</body></html>
