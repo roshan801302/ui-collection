@@ -122,5 +122,5 @@ VS Code: run **Open with Live Server** from the `ui-collection/` folder.
 ## Recommended Client Discovery
 Use `CLIENT_UI_UX_QUESTIONNAIRE.md` before implementation to confirm goals, users, MVP scope, content, branding, integrations, and approvals.
 
-## Product Bundles
-Targeted mini-packs are available under [`bundles/`](bundles/README.md): category packs (Food & Restaurant, Health & Wellness, Property & Workspace, Local & Community), variant packs (Mobile-First all categories, Express & Booking), and the Complete Ultimate Suite. Each bundle includes `README.md` + `BUNDLE.json`.
+## Public Demo Scope
+This public repository contains only the static showcase and the sample pages and assets needed to run it. Distribution bundles and downloadable product packages are kept out of this repository; `/bundles/` is ignored by Git.
