@@ -124,10 +124,3 @@ Use `CLIENT_UI_UX_QUESTIONNAIRE.md` before implementation to confirm goals, user
 
 ## Product Bundles
 Targeted mini-packs are available under [`bundles/`](bundles/README.md): category packs (Food & Restaurant, Health & Wellness, Property & Workspace, Local & Community), variant packs (Mobile-First all categories, Express & Booking), and the Complete Ultimate Suite. Each bundle includes `README.md` + `BUNDLE.json`.
-
-## Maintenance Checklist
-- [ ] Update counts in docs when adding/removing categories or variants.
-- [ ] Keep `index.html` / gallery data in sync with actual paths.
-- [ ] Verify image references resolve locally.
-- [ ] Run a quick link/path check after restructuring.
-- [ ] Remove placeholder contacts/data before client delivery.
