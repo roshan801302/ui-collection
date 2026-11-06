@@ -119,8 +119,5 @@ VS Code: run **Open with Live Server** from the `ui-collection/` folder.
 - **Relative paths matter.** Serve from `ui-collection/` root or adjust asset/link paths after moving files.
 - **Browser differences:** native `<select>` option rendering varies by OS/browser; custom accessible listboxes are not implemented.
 
-## Recommended Client Discovery
-Use `CLIENT_UI_UX_QUESTIONNAIRE.md` before implementation to confirm goals, users, MVP scope, content, branding, integrations, and approvals.
-
 ## Public Demo Scope
 This public repository contains only the static showcase and the sample pages and assets needed to run it. Distribution bundles and downloadable product packages are kept out of this repository; `/bundles/` is ignored by Git.
